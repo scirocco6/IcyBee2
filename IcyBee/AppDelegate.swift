@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import IcbKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, FNProtocolDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
     var window: UIWindow?
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         splitViewController.delegate = self
-        
-        icbConnect(delegate: self)
 
+        IcbDelegate.icbController.connect()
+        
         return true
     }
 
@@ -66,52 +66,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     // MARK: - shared delegate
     //static var sharedDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    // MARK: - FNProtocol
-    
-    var FNDelegate: FNProtocolDelegate?
-    
-    var icbClientID = "iOSBee"
-    var icbChannel  = "IcyBee"
-    var icbNickname = "iOSBee6"
-    var icbPassword = "1234"
-    var icbServer   = "default.icb.net"
-    var icbPort     = 7326
-    var whoCommand  = false
-    var whoView     = false
-    
-    func icbLoginComplete(result: Bool) {
-        if result {
-            icbGlobalWho()
-        }
-    }
-
-    func icbReceiveOpenMessage(from: String, text: String) {}
-    func icbReceivePersonalMessage(from: String, text: String) {}
-    func icbReceiveImportantMessage(from: String, text: String) {}
-
-    func icbReceiveStatusMessage(from: String, text: String) {
-        if from == "Status"{
-            if let range = text.range(of: "You are now in group ") {
-                icbChannel = text.substring(from: range.upperBound)
-                if let range = icbChannel.range(of: " as moderator") {
-                    icbChannel.removeSubrange(range)
-                }
-                DispatchQueue.main.async(execute: {
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "FNGroupUpdated"), object: nil, userInfo: ["groupName": self.icbChannel])
-                })
-            }
-        }
-    }
-
-    func icbReceiveBeepMessage(from: String) {}
-    func icbReceiveErrorMessage(text: String) {}
-    func icbReceiveGenericOutput(text: String) {}
-    
-    func icbWhoComplete() {
-        DispatchQueue.main.async(execute: {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "FNWhoUpdated"), object: nil, userInfo: ["whoResults": self.icbWhoResults])
-        })
-    }
 }
 

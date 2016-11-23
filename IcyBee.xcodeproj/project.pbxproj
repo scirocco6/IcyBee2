@@ -22,6 +22,7 @@
 		4F9A16AB1DE3CF820040960F /* RegExKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; };
 		4F9A16AC1DE3CF820040960F /* RegExKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B31DE4E7460040960F /* NicknameCell.swift */; };
+		4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B51DE51F000040960F /* IcbDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RegExKit.xcodeproj; path = RegExKit/RegExKit.xcodeproj; sourceTree = "<group>"; };
 		4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IcbKit.xcodeproj; path = IcbKit/IcbKit.xcodeproj; sourceTree = "<group>"; };
 		4F9A16B31DE4E7460040960F /* NicknameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
+		4F9A16B51DE51F000040960F /* IcbDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IcbDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F019DBD1DE5380D003F9E60 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A16011DE3C9DD0040960F /* AppDelegate.swift */,
+				4F9A16B51DE51F000040960F /* IcbDelegate.swift */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		4F019DBE1DE53824003F9E60 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A16031DE3C9DD0040960F /* MasterViewController.swift */,
+				4F9A16051DE3C9DD0040960F /* DetailViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4F019DBF1DE53834003F9E60 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A16B31DE4E7460040960F /* NicknameCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4F019DC01DE53866003F9E60 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A160C1DE3C9DD0040960F /* LaunchScreen.storyboard */,
+				4F9A16071DE3C9DD0040960F /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		4F019DC11DE53880003F9E60 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A160A1DE3C9DD0040960F /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		4F019DC21DE53887003F9E60 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A160F1DE3C9DD0040960F /* Info.plist */,
+			);
+			name = Plists;
+			sourceTree = "<group>";
+		};
 		4F9A15F51DE3C9DD0040960F = {
 			isa = PBXGroup;
 			children = (
@@ -186,14 +239,12 @@
 		4F9A16001DE3C9DD0040960F /* IcyBee */ = {
 			isa = PBXGroup;
 			children = (
-				4F9A16011DE3C9DD0040960F /* AppDelegate.swift */,
-				4F9A16031DE3C9DD0040960F /* MasterViewController.swift */,
-				4F9A16051DE3C9DD0040960F /* DetailViewController.swift */,
-				4F9A16B31DE4E7460040960F /* NicknameCell.swift */,
-				4F9A16071DE3C9DD0040960F /* Main.storyboard */,
-				4F9A160A1DE3C9DD0040960F /* Assets.xcassets */,
-				4F9A160C1DE3C9DD0040960F /* LaunchScreen.storyboard */,
-				4F9A160F1DE3C9DD0040960F /* Info.plist */,
+				4F019DC01DE53866003F9E60 /* Storyboards */,
+				4F019DBD1DE5380D003F9E60 /* Delegates */,
+				4F019DBE1DE53824003F9E60 /* ViewControllers */,
+				4F019DBF1DE53834003F9E60 /* Views */,
+				4F019DC11DE53880003F9E60 /* Assets */,
+				4F019DC21DE53887003F9E60 /* Plists */,
 			);
 			path = IcyBee;
 			sourceTree = "<group>";
@@ -417,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */,
 				4F9A16061DE3C9DD0040960F /* DetailViewController.swift in Sources */,
 				4F9A16041DE3C9DD0040960F /* MasterViewController.swift in Sources */,
 				4F9A16021DE3C9DD0040960F /* AppDelegate.swift in Sources */,
@@ -693,6 +745,7 @@
 				4F9A162A1DE3C9DD0040960F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F9A162B1DE3C9DD0040960F /* Build configuration list for PBXNativeTarget "IcyBeeTests" */ = {
 			isa = XCConfigurationList;
@@ -701,6 +754,7 @@
 				4F9A162D1DE3C9DD0040960F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F9A162E1DE3C9DD0040960F /* Build configuration list for PBXNativeTarget "IcyBeeUITests" */ = {
 			isa = XCConfigurationList;
@@ -709,6 +763,7 @@
 				4F9A16301DE3C9DD0040960F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
