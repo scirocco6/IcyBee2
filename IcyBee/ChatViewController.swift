@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  ChatViewController.swift
 //  IcyBee
 //
 //  Created by six on 11/21/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class ChatViewController: UIViewController {
     @IBOutlet var titleBar: UINavigationItem?
     @IBOutlet var textView: UITextView?
     
@@ -24,12 +24,12 @@ class DetailViewController: UIViewController {
 
         // subscribe to topic change messages
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(DetailViewController.updateTopic(_:)),
+                                               selector: #selector(ChatViewController.updateTopic(_:)),
                                                name: NSNotification.Name(rawValue: "FNTopicUpdated"),
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(DetailViewController.addMessage(_:)),
+                                               selector: #selector(ChatViewController.addMessage(_:)),
                                                name: NSNotification.Name(rawValue: "FNNewMessage"),
                                                object: nil)
     }

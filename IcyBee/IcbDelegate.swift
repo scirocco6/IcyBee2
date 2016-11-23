@@ -13,6 +13,8 @@ import IcbKit
 class IcbDelegate: FNProtocolDelegate {
     public static let icbController = IcbDelegate()
 
+    let courierNormal = UIFont(name: "Courier", size: 16)
+
     func connect() {
         icbConnect(delegate: self)
     }
@@ -60,7 +62,7 @@ class IcbDelegate: FNProtocolDelegate {
             let from = NSAttributedString(string:"[=\(from)=]")
             let text = NSAttributedString(string: text)
             
-            assembleAndShowMessage(sender: from, text: text)
+            displayMessage(sender: from, text: text)
         }
     }
     
@@ -69,28 +71,28 @@ class IcbDelegate: FNProtocolDelegate {
         let from = NSAttributedString(string:"<\(from)>")
         let text = NSAttributedString(string: text)
         
-        assembleAndShowMessage(sender: from, text: text)
+        displayMessage(sender: from, text: text)
     }
     
     func icbReceivePersonalMessage(from: String, text: String) {
         let from = NSAttributedString(string:"<*\(from)*>")
         let text = NSAttributedString(string: text)
         
-        assembleAndShowMessage(sender: from, text: text)
+        displayMessage(sender: from, text: text)
     }
     
     func icbReceiveImportantMessage(from: String, text: String) {
         let from = NSAttributedString(string:"<=\(from)=>")
         let text = NSAttributedString(string: text)
         
-        assembleAndShowMessage(sender: from, text: text)
+        displayMessage(sender: from, text: text)
     }
     
     func icbReceiveErrorMessage(text: String) {
         let from = NSAttributedString(string:"[=Error=]")
         let text = NSAttributedString(string: text)
         
-        assembleAndShowMessage(sender: from, text: text)
+        displayMessage(sender: from, text: text)
     }
     
     func icbReceiveBeepMessage(from: String) {
@@ -102,14 +104,14 @@ class IcbDelegate: FNProtocolDelegate {
         // AudioServicesPlayAlertSound(1106)
         AudioServicesPlayAlertSound(1013)
         
-        assembleAndShowMessage(sender: sender, text: text)
+        displayMessage(sender: sender, text: text)
     }
     
     func icbReceiveGenericOutput(text: String) {
         let sender = NSMutableAttributedString(string: "")
         let text   = NSAttributedString(string: text)
         
-        assembleAndShowMessage(sender: sender, text: text)
+        displayMessage(sender: sender, text: text)
     }
     
     func icbWhoComplete() {
@@ -143,11 +145,14 @@ class IcbDelegate: FNProtocolDelegate {
         }
     }
     
-    func assembleAndShowMessage(sender: NSAttributedString, text: NSAttributedString) {
-        let message = NSMutableAttributedString()
-        message.append(sender)
-        message.append(NSAttributedString(string: " "))
-        message.append(text)
+    func displayMessage(sender: NSAttributedString, text: NSAttributedString) {
+        let sender = NSMutableAttributedString(attributedString: sender)
+        let text = NSMutableAttributedString(attributedString: text)
+        
+        sender.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, sender.length))
+        text.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, text.length))
+
+        //message.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: NSMakeRange(0, message.length))
         
         NotificationCenter.default.post(
             name: Notification.Name(rawValue: "FNNewMessage"),

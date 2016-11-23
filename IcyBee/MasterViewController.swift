@@ -12,7 +12,7 @@ import IcbKit
 class MasterViewController: UITableViewController {
     @IBOutlet var titleBar: UINavigationItem?
     
-    var detailViewController: DetailViewController? = nil
+    var chatViewController: ChatViewController? = nil
     var objects = [Any]()
 
     var currentGroupName: String? {
@@ -33,7 +33,7 @@ class MasterViewController: UITableViewController {
 //        self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            self.chatViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ChatViewController
         }
 
         // subscribe to who updates
@@ -69,7 +69,7 @@ class MasterViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+            let controller = (segue.destination as! UINavigationController).topViewController as! ChatViewController
             controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
         }
