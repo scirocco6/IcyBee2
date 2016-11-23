@@ -7,53 +7,71 @@
 //
 
 import UIKit
+import IcbKit
 
 class MasterViewController: UITableViewController {
-
+    @IBOutlet var titleBar: UINavigationItem?
+    
     var detailViewController: DetailViewController? = nil
     var objects = [Any]()
 
+    var currentGroupName: String? {
+        didSet{
+            titleBar?.title = currentGroupName
+        }
+    }
+    var currentGroup: FNGroup?
+    var usersInGroup: [String]?
+    var whoResults: FNWhoResults?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
+//        self.navigationItem.leftBarButtonItem = self.editButtonItem
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        self.navigationItem.rightBarButtonItem = addButton
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+//        self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+
+        // subscribe to who updates
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(MasterViewController.updateWho(_:)),
+                                               name: NSNotification.Name(rawValue: "FNWhoUpdated"),
+                                               object: nil)
+        // subscribe to group change messages
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(MasterViewController.updateGroup(_:)),
+                                               name: NSNotification.Name(rawValue: "FNGroupUpdated"),
+                                               object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.isCollapsed
+        
         super.viewWillAppear(animated)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        // unsubscribe from who updates
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "FNWhoUpdated"), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "FNGroupUpdated"), object: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.insertRows(at: [indexPath], with: .automatic)
     }
 
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
+            let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+            controller.navigationItem.leftItemsSupplementBackButton = true
         }
     }
 
@@ -64,31 +82,46 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        if currentGroup == nil || usersInGroup == nil {return 0}
+        return usersInGroup!.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NickNameCell
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        if let moderator = currentGroup?.moderator {
+            if let nickName = usersInGroup?[indexPath.row] {
+                cell.moderatorIndicator?.text = nickName == moderator ? "m" : ""
+                cell.nickNameLabel?.text = nickName
+            }
+        }
+        
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
+    // MARK: - ICB
+    func updateWho(_ notification: Notification) {
+        guard
+            let results    = notification.userInfo?["whoResults"] as! FNWhoResults?,
+            let groupName  = currentGroupName,
+            let nameSet    = results.usersByGroup[groupName]
+        else {return}
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            objects.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        whoResults   = results
+        currentGroup = whoResults?.groups[groupName]
+        usersInGroup = Array(nameSet).sorted()
+        
+        self.tableView.reloadData()
+    }
+    
+    func updateGroup(_ notification: Notification) {
+        if let groupName = notification.userInfo?["groupName"] as? String {
+            currentGroupName = groupName
+            currentGroup = whoResults?.groups[groupName]
+            
+            // should prolly fire a who command
+            self.tableView.reloadData()
         }
     }
-
-
 }
 

@@ -15,6 +15,13 @@
 		4F9A160E1DE3C9DD0040960F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F9A160C1DE3C9DD0040960F /* LaunchScreen.storyboard */; };
 		4F9A16191DE3C9DD0040960F /* IcyBeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16181DE3C9DD0040960F /* IcyBeeTests.swift */; };
 		4F9A16241DE3C9DD0040960F /* IcyBeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16231DE3C9DD0040960F /* IcyBeeUITests.swift */; };
+		4F9A169D1DE3CA9E0040960F /* IcbKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A168B1DE3CA570040960F /* IcbKit.framework */; };
+		4F9A169E1DE3CA9E0040960F /* RegExKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; };
+		4F9A16A61DE3CF7E0040960F /* IcbKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A168B1DE3CA570040960F /* IcbKit.framework */; };
+		4F9A16A71DE3CF7E0040960F /* IcbKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A168B1DE3CA570040960F /* IcbKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F9A16AB1DE3CF820040960F /* RegExKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; };
+		4F9A16AC1DE3CF820040960F /* RegExKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B31DE4E7460040960F /* NicknameCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +39,78 @@
 			remoteGlobalIDString = 4F9A15FD1DE3C9DD0040960F;
 			remoteInfo = IcyBee;
 		};
+		4F9A165A1DE3CA110040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F9A163B1DE3CA100040960F;
+			remoteInfo = RegExKit;
+		};
+		4F9A165C1DE3CA110040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F9A16441DE3CA100040960F;
+			remoteInfo = RegExKitTests;
+		};
+		4F9A168A1DE3CA570040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F9A166B1DE3CA560040960F;
+			remoteInfo = IcbKit;
+		};
+		4F9A168C1DE3CA570040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4F9A16741DE3CA560040960F;
+			remoteInfo = IcbKitTests;
+		};
+		4F9A16A21DE3CE6A0040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F9A166A1DE3CA560040960F;
+			remoteInfo = IcbKit;
+		};
+		4F9A16A41DE3CE6E0040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F9A163A1DE3CA100040960F;
+			remoteInfo = RegExKit;
+		};
+		4F9A16A81DE3CF7E0040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F9A166A1DE3CA560040960F;
+			remoteInfo = IcbKit;
+		};
+		4F9A16AD1DE3CF820040960F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F9A163A1DE3CA100040960F;
+			remoteInfo = RegExKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4F9A16AA1DE3CF7E0040960F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4F9A16A71DE3CF7E0040960F /* IcbKit.framework in Embed Frameworks */,
+				4F9A16AC1DE3CF820040960F /* RegExKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4F9A15FE1DE3C9DD0040960F /* IcyBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IcyBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +127,9 @@
 		4F9A161F1DE3C9DD0040960F /* IcyBeeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IcyBeeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F9A16231DE3C9DD0040960F /* IcyBeeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcyBeeUITests.swift; sourceTree = "<group>"; };
 		4F9A16251DE3C9DD0040960F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RegExKit.xcodeproj; path = RegExKit/RegExKit.xcodeproj; sourceTree = "<group>"; };
+		4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IcbKit.xcodeproj; path = IcbKit/IcbKit.xcodeproj; sourceTree = "<group>"; };
+		4F9A16B31DE4E7460040960F /* NicknameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +137,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F9A169D1DE3CA9E0040960F /* IcbKit.framework in Frameworks */,
+				4F9A16AB1DE3CF820040960F /* RegExKit.framework in Frameworks */,
+				4F9A16A61DE3CF7E0040960F /* IcbKit.framework in Frameworks */,
+				4F9A169E1DE3CA9E0040960F /* RegExKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +164,8 @@
 		4F9A15F51DE3C9DD0040960F = {
 			isa = PBXGroup;
 			children = (
+				4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */,
+				4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */,
 				4F9A16001DE3C9DD0040960F /* IcyBee */,
 				4F9A16171DE3C9DD0040960F /* IcyBeeTests */,
 				4F9A16221DE3C9DD0040960F /* IcyBeeUITests */,
@@ -102,6 +189,7 @@
 				4F9A16011DE3C9DD0040960F /* AppDelegate.swift */,
 				4F9A16031DE3C9DD0040960F /* MasterViewController.swift */,
 				4F9A16051DE3C9DD0040960F /* DetailViewController.swift */,
+				4F9A16B31DE4E7460040960F /* NicknameCell.swift */,
 				4F9A16071DE3C9DD0040960F /* Main.storyboard */,
 				4F9A160A1DE3C9DD0040960F /* Assets.xcassets */,
 				4F9A160C1DE3C9DD0040960F /* LaunchScreen.storyboard */,
@@ -128,6 +216,24 @@
 			path = IcyBeeUITests;
 			sourceTree = "<group>";
 		};
+		4F9A16561DE3CA100040960F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A165B1DE3CA110040960F /* RegExKit.framework */,
+				4F9A165D1DE3CA110040960F /* RegExKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4F9A16861DE3CA560040960F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F9A168B1DE3CA570040960F /* IcbKit.framework */,
+				4F9A168D1DE3CA570040960F /* IcbKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,10 +244,15 @@
 				4F9A15FA1DE3C9DD0040960F /* Sources */,
 				4F9A15FB1DE3C9DD0040960F /* Frameworks */,
 				4F9A15FC1DE3C9DD0040960F /* Resources */,
+				4F9A16AA1DE3CF7E0040960F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4F9A16A51DE3CE6E0040960F /* PBXTargetDependency */,
+				4F9A16A31DE3CE6A0040960F /* PBXTargetDependency */,
+				4F9A16A91DE3CF7E0040960F /* PBXTargetDependency */,
+				4F9A16AE1DE3CF820040960F /* PBXTargetDependency */,
 			);
 			name = IcyBee;
 			productName = IcyBee;
@@ -224,6 +335,16 @@
 			mainGroup = 4F9A15F51DE3C9DD0040960F;
 			productRefGroup = 4F9A15FF1DE3C9DD0040960F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4F9A16861DE3CA560040960F /* Products */;
+					ProjectRef = 4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 4F9A16561DE3CA100040960F /* Products */;
+					ProjectRef = 4F9A16551DE3CA100040960F /* RegExKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4F9A15FD1DE3C9DD0040960F /* IcyBee */,
@@ -232,6 +353,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4F9A165B1DE3CA110040960F /* RegExKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RegExKit.framework;
+			remoteRef = 4F9A165A1DE3CA110040960F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4F9A165D1DE3CA110040960F /* RegExKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RegExKitTests.xctest;
+			remoteRef = 4F9A165C1DE3CA110040960F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4F9A168B1DE3CA570040960F /* IcbKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IcbKit.framework;
+			remoteRef = 4F9A168A1DE3CA570040960F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4F9A168D1DE3CA570040960F /* IcbKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = IcbKitTests.xctest;
+			remoteRef = 4F9A168C1DE3CA570040960F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4F9A15FC1DE3C9DD0040960F /* Resources */ = {
@@ -268,6 +420,7 @@
 				4F9A16061DE3C9DD0040960F /* DetailViewController.swift in Sources */,
 				4F9A16041DE3C9DD0040960F /* MasterViewController.swift in Sources */,
 				4F9A16021DE3C9DD0040960F /* AppDelegate.swift in Sources */,
+				4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +452,26 @@
 			isa = PBXTargetDependency;
 			target = 4F9A15FD1DE3C9DD0040960F /* IcyBee */;
 			targetProxy = 4F9A16201DE3C9DD0040960F /* PBXContainerItemProxy */;
+		};
+		4F9A16A31DE3CE6A0040960F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IcbKit;
+			targetProxy = 4F9A16A21DE3CE6A0040960F /* PBXContainerItemProxy */;
+		};
+		4F9A16A51DE3CE6E0040960F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RegExKit;
+			targetProxy = 4F9A16A41DE3CE6E0040960F /* PBXContainerItemProxy */;
+		};
+		4F9A16A91DE3CF7E0040960F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IcbKit;
+			targetProxy = 4F9A16A81DE3CF7E0040960F /* PBXContainerItemProxy */;
+		};
+		4F9A16AE1DE3CF820040960F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RegExKit;
+			targetProxy = 4F9A16AD1DE3CF820040960F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -418,6 +591,7 @@
 		4F9A16291DE3C9DD0040960F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SP5J495KSD;
 				INFOPLIST_FILE = IcyBee/Info.plist;
@@ -431,6 +605,7 @@
 		4F9A162A1DE3C9DD0040960F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SP5J495KSD;
 				INFOPLIST_FILE = IcyBee/Info.plist;
