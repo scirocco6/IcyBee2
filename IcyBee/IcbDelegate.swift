@@ -9,6 +9,8 @@
 import Foundation
 import AudioToolbox
 import IcbKit
+import RegExKit
+
 
 class IcbDelegate: FNProtocolDelegate {
     public static let icbController = IcbDelegate()
@@ -19,8 +21,105 @@ class IcbDelegate: FNProtocolDelegate {
         icbConnect(delegate: self)
     }
     
-    // MARK: - FNProtocol
+    // MARK: - User Input
+    func parseUserInput(_ input: String) {
+        if input.hasPrefix("/beep")   { beep(input) }
+        else if input.hasPrefix("/m") { privateMessage(input) }
+        else if input.hasPrefix("/g") { joinGroup(input) }
+//        else if input.hasPrefix("/w") { whoCommand(input) }
+        else {icbSendOpenMessage(input)}
+    }
     
+    // iOS input methods will sometimes add an extra whitespace to the end
+    func joinGroup(_ inputString: String) {
+        let regex = RXRegularExpression(pattern: "^\\/g\\s+(\\S+)\\s?$", matching: inputString)
+        
+        if regex.matched {
+            let target = regex.captures[0]
+            icbJoinGroup(target)
+        }
+        else {
+            userTextErrorMessage("USAGE: /g groupname\n")
+        }
+    }
+    
+    func privateMessage(_ inputString: String) {
+        let regex = RXRegularExpression(pattern: "^\\/m\\s+(\\S+)\\s+(.+)", matching: inputString)
+        
+        if regex.captured == 2 {
+            let target = regex.captures[0]
+            let message = regex.captures[1]
+            icbSendPrivateMessage(message, to: target)
+        }
+        else {
+            userTextErrorMessage("USAGE: /m nickname message\n")
+        }
+    }
+    
+    func beep(_ inputString: String) {
+        let regex = RXRegularExpression(pattern: "^\\/beep\\s+(\\S+)\\s?$", matching: inputString)
+        
+        if regex.matched {
+            let target = regex.captures[0]
+            icbSendBeep(to: target)
+        }
+        else {
+            userTextErrorMessage("USAGE: /beep nickname\n")
+        }
+    }
+    
+    // Mark: - Output
+    func handleStatusMessage(from: String, text: String) {
+        if let range = text.range(of: "You are now in group ") {
+            icbGlobalWho() // update all who information
+            
+            icbChannel = text.substring(from: range.upperBound)
+            if let range = icbChannel.range(of: " as moderator") {
+                icbChannel.removeSubrange(range)
+            }
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "FNGroupUpdated"), object: nil, userInfo: ["groupName": self.icbChannel])
+            })
+        }
+    }
+    
+    func handleTopicMessage(from: String, text: String) {
+        if let range = text.range(of: "changed the topic to \"") {
+            let topic = String(text.substring(from: range.upperBound).characters.dropLast())
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
+        }
+    }
+    
+    func displayMessage(sender: NSAttributedString, text: NSAttributedString) {
+        let sender = NSMutableAttributedString(attributedString: sender)
+        let text = NSMutableAttributedString(attributedString: text)
+        
+        sender.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, sender.length))
+        text.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, text.length))
+        
+        //message.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: NSMakeRange(0, message.length))
+        
+        NotificationCenter.default.post(
+            name: Notification.Name(rawValue: "FNNewMessage"),
+            object: nil,
+            userInfo: ["from": sender, "text": text])
+    }
+    
+    func userTextErrorMessage(_ errorMessage: String) {
+        let sender = NSMutableAttributedString(string: "[=IcyBee=]")
+        let text   = NSMutableAttributedString(string: errorMessage)
+        
+        sender.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, sender.length))
+        text.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, text.length))
+        text.addAttributes([NSForegroundColorAttributeName: UIColor.red], range: NSMakeRange(0, text.length))
+
+        NotificationCenter.default.post(
+            name: Notification.Name(rawValue: "FNNewMessage"),
+            object: nil,
+            userInfo: ["from": sender, "text": text])
+    }
+    
+    // MARK: - FNProtocol
     var FNDelegate: FNProtocolDelegate?
     
     var icbClientID = "iOSBee"
@@ -65,7 +164,6 @@ class IcbDelegate: FNProtocolDelegate {
             displayMessage(sender: from, text: text)
         }
     }
-    
 
     func icbReceiveOpenMessage(from: String, text: String) {
         let from = NSAttributedString(string:"<\(from)>")
@@ -122,41 +220,5 @@ class IcbDelegate: FNProtocolDelegate {
         if let topic = icbWhoResults.groups[icbChannel]?.topic {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
         }
-    }
-    
-    func handleStatusMessage(from: String, text: String) {
-        if let range = text.range(of: "You are now in group ") {
-            icbGlobalWho() // update all who information
-            
-            icbChannel = text.substring(from: range.upperBound)
-            if let range = icbChannel.range(of: " as moderator") {
-                icbChannel.removeSubrange(range)
-            }
-            DispatchQueue.main.async(execute: {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "FNGroupUpdated"), object: nil, userInfo: ["groupName": self.icbChannel])
-            })
-        }
-    }
-    
-    func handleTopicMessage(from: String, text: String) {
-        if let range = text.range(of: "changed the topic to \"") {
-            let topic = String(text.substring(from: range.upperBound).characters.dropLast())
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
-        }
-    }
-    
-    func displayMessage(sender: NSAttributedString, text: NSAttributedString) {
-        let sender = NSMutableAttributedString(attributedString: sender)
-        let text = NSMutableAttributedString(attributedString: text)
-        
-        sender.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, sender.length))
-        text.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, text.length))
-
-        //message.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: NSMakeRange(0, message.length))
-        
-        NotificationCenter.default.post(
-            name: Notification.Name(rawValue: "FNNewMessage"),
-            object: nil,
-            userInfo: ["from": sender, "text": text])
     }
 }

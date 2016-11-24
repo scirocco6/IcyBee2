@@ -63,6 +63,8 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+// Mark - ICB Output
+
     func addMessage(_ notification: Notification) {
         let newMessage = NSMutableAttributedString(string: "")
         if let from = notification.userInfo?["from"] as? NSAttributedString {
@@ -85,16 +87,15 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
 // Mark - Keyboard handling
     func keyboardNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
-                bottomLayoutConstraint?.constant = 0.0
-            } else {
-                bottomLayoutConstraint?.constant = endFrame?.size.height ?? 0.0
-            }
+            let newFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            
+            bottomLayoutConstraint?.constant = (newFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : newFrame?.size.height ?? 0.0
+
+            let duration             = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveNumber =  userInfo[UIKeyboardAnimationCurveUserInfoKey]    as? NSNumber
+            let animationCurveRaw    =  animationCurveNumber?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve       =  UIViewAnimationOptions(rawValue: animationCurveRaw)
+            
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),
                            options: animationCurve,
@@ -108,7 +109,9 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         
         if textField.text != "" {
-            // do something with the input!!@
+            textView?.text.append(textField.text!)
+            textView?.text.append("\n")
+            IcbDelegate.icbController.parseUserInput(textField.text!)
             textField.text = ""
         }
         
