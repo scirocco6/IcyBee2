@@ -19,6 +19,7 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     let returnString = NSMutableAttributedString(string: "\n")
 
     var messageString = NSMutableAttributedString(string: "")
+    var hasExternalKeyboard = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,9 +88,22 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
 // Mark - Keyboard handling
     func keyboardNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            let newFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
             
-            bottomLayoutConstraint?.constant = (newFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : newFrame?.size.height ?? 0.0
+
+            let keyboard = self.view.convert(keyboardFrame!, from: self.view.window)
+            let height   = self.view.frame.size.height;
+            
+            var keyboardHeight = height - keyboard.origin.y
+            if ((keyboard.origin.y + keyboard.size.height) > height) {
+                hasExternalKeyboard = true
+            }
+            else {
+                hasExternalKeyboard = false
+                keyboardHeight = (keyboardFrame?.size.height) ?? 0.0
+            }
+            
+            bottomLayoutConstraint?.constant = (keyboardFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : keyboardHeight
 
             let duration             = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
             let animationCurveNumber =  userInfo[UIKeyboardAnimationCurveUserInfoKey]    as? NSNumber
@@ -106,7 +120,7 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     
 // Mark - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if hasExternalKeyboard == false {textField.resignFirstResponder()}
         
         if textField.text != "" {
             textView?.text.append(textField.text!)
