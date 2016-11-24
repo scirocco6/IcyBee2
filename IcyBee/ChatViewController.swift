@@ -12,6 +12,7 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var titleBar: UINavigationItem?
     @IBOutlet var textView: UITextView?
     @IBOutlet var inputLine: UITextField?
+    @IBOutlet var bottomLayoutConstraint: NSLayoutConstraint?
     
     let emptyString  = NSMutableAttributedString(string: "")
     let spaceString  = NSMutableAttributedString(string: " ")
@@ -36,25 +37,24 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ChatViewController.keyboardWillShow(_:)),
-                                               name: NSNotification.Name(rawValue: "UIKeyboardWillShowNotification"),
+                                               selector: #selector(self.keyboardNotification(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillChangeFrame,
                                                object: nil)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ChatViewController.keyboardWillHide(_:)),
-                                               name: NSNotification.Name(rawValue: "UIKeyboardWillHideNotification"),
-                                               object: nil)
         super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "UIKeyboardWillShowNotification"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "UIKeyboardWillHideNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func updateTopic(_ notification: Notification) {
@@ -80,43 +80,39 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         let bottom = NSMakeRange((textView?.text.characters.count)! - 1, 1)
         textView?.scrollRangeToVisible(bottom)
     }
+
+    
+// Mark - Keyboard handling
+    func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+                bottomLayoutConstraint?.constant = 0.0
+            } else {
+                bottomLayoutConstraint?.constant = endFrame?.size.height ?? 0.0
+            }
+            UIView.animate(withDuration: duration,
+                           delay: TimeInterval(0),
+                           options: animationCurve,
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
+    }
     
 // Mark - UITextFieldDelegate
-    func keyboardWillShow(_ notification: Notification) {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        if textField.text != "" {
+            // do something with the input!!@
+            textField.text = ""
+        }
+        
+        return true
     }
-    
-    func keyboardWillHide(_ notification: Notification) {
-    }
-    
-//    - (void)keyboardWillShow:(NSNotification *) notification {
-//    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//    
-//    CGRect aRect = self.view.frame;
-//    
-//    aRect.size.height -= keyboardSize.height;
-//    if (!CGRectContainsPoint(aRect, inputTextField.frame.origin) ) {
-//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(scrollView.contentInset.top, 0.0, keyboardSize.height, 0.0);
-//    scrollView.contentInset = contentInsets;
-//    scrollView.scrollIndicatorInsets = contentInsets;
-//    }
-//    }
-//    
-//    
-//    - (void) keyboardWillHide:(NSNotification *) notification {
-//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(scrollView.contentInset.top, 0.0, 0.0, 0.0);
-//    scrollView.contentInset = contentInsets;
-//    scrollView.scrollIndicatorInsets = contentInsets;
-//    }
-//    
-//    -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-//    [inputTextField resignFirstResponder];
-//    
-//    if([[inputTextField text] length]) {
-//    [[IcbConnection sharedInstance] processInput: [inputTextField text]];
-//    [inputTextField setText:@""];
-//    }
-//    
-//    return YES;
-//    }
 }
 

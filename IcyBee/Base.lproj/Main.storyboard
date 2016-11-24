@@ -37,13 +37,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFF-3O-Gkc">
-                                <rect key="frame" x="0.0" y="64" width="702.5" height="674"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" shipmentTrackingNumber="YES" flightNumber="YES" lookupSuggestion="YES"/>
-                            </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-8D-HIK">
                                 <rect key="frame" x="0.0" y="738" width="703" height="30"/>
                                 <nil key="textColor"/>
@@ -53,21 +46,29 @@
                                     <outlet property="delegate" destination="JEX-9P-axG" id="P4m-0t-XkC"/>
                                 </connections>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFF-3O-Gkc">
+                                <rect key="frame" x="0.0" y="64" width="703" height="674"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" shipmentTrackingNumber="YES" flightNumber="YES" lookupSuggestion="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qFF-3O-Gkc" secondAttribute="trailing" id="4xA-q7-SON"/>
-                            <constraint firstItem="PAJ-8D-HIK" firstAttribute="top" secondItem="qFF-3O-Gkc" secondAttribute="bottom" id="O8H-hJ-dG6"/>
                             <constraint firstItem="qFF-3O-Gkc" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="UOW-Yq-uuu"/>
                             <constraint firstItem="qFF-3O-Gkc" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="WqS-uB-lqE"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="PAJ-8D-HIK" secondAttribute="bottom" id="Z68-rN-Jnb"/>
                             <constraint firstAttribute="trailing" secondItem="PAJ-8D-HIK" secondAttribute="trailing" id="bcK-Fz-PkU"/>
                             <constraint firstItem="PAJ-8D-HIK" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="sdO-gu-fZn"/>
+                            <constraint firstItem="PAJ-8D-HIK" firstAttribute="top" secondItem="qFF-3O-Gkc" secondAttribute="bottom" id="uPp-k4-F4S"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Topic" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="bottomLayoutConstraint" destination="Z68-rN-Jnb" id="mte-X8-K5o"/>
                         <outlet property="inputLine" destination="PAJ-8D-HIK" id="LSl-l5-iyr"/>
                         <outlet property="textView" destination="qFF-3O-Gkc" id="6ea-Sr-IiF"/>
                         <outlet property="titleBar" destination="mOI-FS-AaM" id="c7P-c7-qu7"/>
