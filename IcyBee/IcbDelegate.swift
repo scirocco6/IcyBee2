@@ -70,6 +70,31 @@ class IcbDelegate: FNProtocolDelegate {
     
     // Mark: - Output
     func handleStatusMessage(from: String, text: String) {
+        if text.hasPrefix("You are now in group ") {setIcbGroup(text)}
+        else {
+            displayStatusMessage(from: from, text: text)
+        }
+    }
+    
+    func handlePresenceMessage(from: String, text: String) {
+        let regex = RXRegularExpression(pattern: "^(\\S+)\\s+", matching: text)
+        
+        if regex.matched {
+            let user = regex.captures[0]
+            if from == "Arrive" {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "FNUserArrived"), object: nil, userInfo: ["user": user])
+            }
+            else {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "FNUserDeparted"), object: nil, userInfo: ["user": user])
+            }
+        }
+    }
+    
+    func handleArriveMessage(from: String, text: String) {
+        
+    }
+    
+    func setIcbGroup(_ text: String) {
         if let range = text.range(of: "You are now in group ") {
             icbGlobalWho() // update all who information
             
@@ -82,12 +107,19 @@ class IcbDelegate: FNProtocolDelegate {
             })
         }
     }
-    
+
     func handleTopicMessage(from: String, text: String) {
         if let range = text.range(of: "changed the topic to \"") {
             let topic = String(text.substring(from: range.upperBound).characters.dropLast())
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
         }
+    }
+    
+    func displayStatusMessage(from: String, text: String) {
+        let from = NSAttributedString(string:"[=\(from)=]")
+        let text = NSAttributedString(string: text)
+    
+        displayMessage(sender: from, text: text)
     }
     
     func displayMessage(sender: NSAttributedString, text: NSAttributedString) {
@@ -149,20 +181,19 @@ class IcbDelegate: FNProtocolDelegate {
         enum senders: String {
             case status = "Status"
             case topic  = "Topic"
+            case depart = "Depart"
+            case arrive = "Arrive"
         }
         
         if let sender = senders(rawValue: from) {
             switch sender {
             case .status: handleStatusMessage(from: from, text: text)
             case .topic:  handleTopicMessage(from: from, text: text)
+            case .arrive, .depart: handlePresenceMessage(from: from, text: text)
             }
         }
-        else {
-            let from = NSAttributedString(string:"[=\(from)=]")
-            let text = NSAttributedString(string: text)
-            
-            displayMessage(sender: from, text: text)
-        }
+        else {displayStatusMessage(from: from, text: text)}
+        
     }
 
     func icbReceiveOpenMessage(from: String, text: String) {

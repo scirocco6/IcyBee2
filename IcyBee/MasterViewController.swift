@@ -41,10 +41,23 @@ class MasterViewController: UITableViewController {
                                                selector: #selector(MasterViewController.updateWho(_:)),
                                                name: NSNotification.Name(rawValue: "FNWhoUpdated"),
                                                object: nil)
+
         // subscribe to group change messages
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(MasterViewController.updateGroup(_:)),
                                                name: NSNotification.Name(rawValue: "FNGroupUpdated"),
+                                               object: nil)
+        
+        // subscribe to user arrival messages
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(MasterViewController.userArrived(_:)),
+                                               name: NSNotification.Name(rawValue: "FNUserArrived"),
+                                               object: nil)
+        
+        // subscribe to user departure messages
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(MasterViewController.userDeparted(_:)),
+                                               name: NSNotification.Name(rawValue: "FNUserDeparted"),
                                                object: nil)
     }
 
@@ -112,6 +125,10 @@ class MasterViewController: UITableViewController {
         usersInGroup = Array(nameSet).sorted()
         
         self.tableView.reloadData()
+        
+        if let topic = currentGroup?.topic {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
+        }
     }
     
     func updateGroup(_ notification: Notification) {
@@ -122,6 +139,49 @@ class MasterViewController: UITableViewController {
             // should prolly fire a who command
             self.tableView.reloadData()
         }
+    }
+    
+    func userArrived(_ notification: Notification) {
+        guard
+            let userName = notification.userInfo?["user"] as? String,
+            let group = currentGroupName
+        else {
+            IcbDelegate.icbController.icbGlobalWho()
+            return
+        }
+        
+        _ = whoResults?.usersByGroup[group]?.insert(userName)
+        whoResults?.usersByNickname[userName]?.group = group
+        
+        updateNameSet()
+    }
+    
+    func userDeparted(_ notification: Notification) {
+        guard
+            let userName = notification.userInfo?["user"] as? String,
+            let group = currentGroupName
+        else {
+            IcbDelegate.icbController.icbGlobalWho()
+            return
+        }
+        
+        _ = whoResults?.usersByGroup[group]?.remove(userName)
+        whoResults?.usersByNickname[userName]?.group = "" // we have no idea where they went so just blank it
+                
+        updateNameSet()
+    }
+    
+    func updateNameSet() {
+        guard
+            let group = currentGroupName,
+            let nameSet = whoResults?.usersByGroup[group]
+        else {
+            IcbDelegate.icbController.icbGlobalWho()
+            return
+        }
+        
+        usersInGroup = Array(nameSet.sorted())
+        self.tableView.reloadData()
     }
 }
 

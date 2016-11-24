@@ -21,6 +21,7 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     var messageString = NSMutableAttributedString(string: "")
     var hasExternalKeyboard = false
     
+// Mark - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +31,7 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
                                                name: NSNotification.Name(rawValue: "FNTopicUpdated"),
                                                object: nil)
         
+        // subscribe to new messages
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(ChatViewController.addMessage(_:)),
                                                name: NSNotification.Name(rawValue: "FNNewMessage"),
@@ -57,7 +59,10 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+
+
     
+// Mark - Topic updates
     func updateTopic(_ notification: Notification) {
         if let topic = notification.userInfo?["topic"] as? String {
             titleBar?.title = topic == "(None)" ? "" : topic // don't show (None) as topic blank instead
@@ -65,7 +70,6 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     }
     
 // Mark - ICB Output
-
     func addMessage(_ notification: Notification) {
         let newMessage = NSMutableAttributedString(string: "")
         if let from = notification.userInfo?["from"] as? NSAttributedString {
