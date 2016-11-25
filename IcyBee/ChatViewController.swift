@@ -93,35 +93,34 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     
 // Mark - Keyboard handling
     func keyboardNotification(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            
+        guard let userInfo = notification.userInfo else {return}
 
-            let keyboard = self.view.convert(keyboardFrame!, from: self.view.window)
-            let height   = self.view.frame.size.height;
-            
-            var keyboardHeight = height - keyboard.origin.y
-            if ((keyboard.origin.y + keyboard.size.height) > height) {
-                hasExternalKeyboard = true
-            }
-            else {
-                hasExternalKeyboard = false
-                keyboardHeight = (keyboardFrame?.size.height) ?? 0.0
-            }
-            
-            bottomLayoutConstraint?.constant = (keyboardFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : keyboardHeight
+        let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
 
-            let duration             = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveNumber =  userInfo[UIKeyboardAnimationCurveUserInfoKey]    as? NSNumber
-            let animationCurveRaw    =  animationCurveNumber?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-            let animationCurve       =  UIViewAnimationOptions(rawValue: animationCurveRaw)
-            
-            UIView.animate(withDuration: duration,
-                           delay: TimeInterval(0),
-                           options: animationCurve,
-                           animations: { self.view.layoutIfNeeded() },
-                           completion: nil)
+        let keyboard = self.view.convert(keyboardFrame!, from: self.view.window)
+        let height   = self.view.frame.size.height;
+
+        var keyboardHeight = height - keyboard.origin.y
+        if ((keyboard.origin.y + keyboard.size.height) > height) {
+            hasExternalKeyboard = true
         }
+        else {
+            hasExternalKeyboard = false
+            keyboardHeight = (keyboardFrame?.size.height) ?? 0.0
+        }
+
+        bottomLayoutConstraint?.constant = (keyboardFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : keyboardHeight
+        
+        let duration             = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveNumber =  userInfo[UIKeyboardAnimationCurveUserInfoKey]    as? NSNumber
+        let animationCurveRaw    =  animationCurveNumber?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+        let animationCurve       =  UIViewAnimationOptions(rawValue: animationCurveRaw)
+        
+        UIView.animate(withDuration: duration,
+                       delay: TimeInterval(0),
+                       options: animationCurve,
+                       animations: { self.view.layoutIfNeeded() },
+                       completion: nil)
     }
     
 // Mark - UITextFieldDelegate
