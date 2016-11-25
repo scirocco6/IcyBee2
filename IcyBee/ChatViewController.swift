@@ -83,11 +83,13 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         newMessage.append(returnString)
         textView?.textStorage.append(newMessage)
         
+        scrollToBottom()
+    }
 
+    func scrollToBottom() {
         let bottom = NSMakeRange((textView?.text.characters.count)! - 1, 1)
         textView?.scrollRangeToVisible(bottom)
     }
-
     
 // Mark - Keyboard handling
     func keyboardNotification(notification: NSNotification) {
@@ -129,6 +131,8 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         if textField.text != "" {
             textView?.text.append(textField.text!)
             textView?.text.append("\n")
+            scrollToBottom()
+
             IcbDelegate.icbController.parseUserInput(textField.text!)
             textField.text = ""
         }
