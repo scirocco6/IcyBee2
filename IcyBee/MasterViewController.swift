@@ -24,6 +24,7 @@ class MasterViewController: UITableViewController {
     var usersInGroup: [String]?
     var whoResults: FNWhoResults?
 
+    // Mark - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -79,7 +80,6 @@ class MasterViewController: UITableViewController {
     }
 
     // MARK: - Segues
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             let controller = (segue.destination as! UINavigationController).topViewController as! ChatViewController
@@ -89,7 +89,6 @@ class MasterViewController: UITableViewController {
     }
 
     // MARK: - Table View
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -112,6 +111,8 @@ class MasterViewController: UITableViewController {
         return cell
     }
 
+    // Mark: User interaction
+    
     // MARK: - ICB
     func updateWho(_ notification: Notification) {
         guard
