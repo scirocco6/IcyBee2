@@ -23,6 +23,7 @@
 		4F9A16AC1DE3CF820040960F /* RegExKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B31DE4E7460040960F /* NicknameCell.swift */; };
 		4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B51DE51F000040960F /* IcbDelegate.swift */; };
+		4FCA2AE31DEFCD9E00391CCA /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IcbKit.xcodeproj; path = IcbKit/IcbKit.xcodeproj; sourceTree = "<group>"; };
 		4F9A16B31DE4E7460040960F /* NicknameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
 		4F9A16B51DE51F000040960F /* IcbDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IcbDelegate.swift; sourceTree = "<group>"; };
+		4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				4F9A16B31DE4E7460040960F /* NicknameCell.swift */,
+				4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FCA2AE31DEFCD9E00391CCA /* MessageView.swift in Sources */,
 				4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */,
 				4F9A16061DE3C9DD0040960F /* ChatViewController.swift in Sources */,
 				4F9A16041DE3C9DD0040960F /* MasterViewController.swift in Sources */,

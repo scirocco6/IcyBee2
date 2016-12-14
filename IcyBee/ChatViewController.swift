@@ -10,15 +10,12 @@ import UIKit
 
 class ChatViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var titleBar: UINavigationItem?
-    @IBOutlet var textView: UITextView?
     @IBOutlet var inputLine: UITextField?
     @IBOutlet var bottomLayoutConstraint: NSLayoutConstraint?
     
-    let emptyString  = NSMutableAttributedString(string: "")
-    let spaceString  = NSMutableAttributedString(string: " ")
-    let returnString = NSMutableAttributedString(string: "\n")
-
+    let emptyString   = NSMutableAttributedString(string: "")
     var messageString = NSMutableAttributedString(string: "")
+    
     var hasExternalKeyboard = false
     
 // Mark - View lifecycle
@@ -29,12 +26,6 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(ChatViewController.updateTopic(_:)),
                                                name: NSNotification.Name(rawValue: "FNTopicUpdated"),
-                                               object: nil)
-        
-        // subscribe to new messages
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ChatViewController.addMessage(_:)),
-                                               name: NSNotification.Name(rawValue: "FNNewMessage"),
                                                object: nil)
     }
     
@@ -67,28 +58,6 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         if let topic = notification.userInfo?["topic"] as? String {
             titleBar?.title = topic == "(None)" ? "" : topic // don't show (None) as topic blank instead
         }
-    }
-    
-// Mark - ICB Output
-    func addMessage(_ notification: Notification) {
-        let newMessage = NSMutableAttributedString(string: "")
-        if let from = notification.userInfo?["from"] as? NSAttributedString {
-            newMessage.append(from)
-            newMessage.append(spaceString)
-        }
-        if let text = notification.userInfo?["text"] as? NSAttributedString {
-            newMessage.append(text)
-        }
-        
-        newMessage.append(returnString)
-        textView?.textStorage.append(newMessage)
-        
-        scrollToBottom()
-    }
-
-    func scrollToBottom() {
-        let bottom = NSMakeRange((textView?.text.characters.count)! - 1, 1)
-        textView?.scrollRangeToVisible(bottom)
     }
     
 // Mark - Keyboard handling
@@ -128,9 +97,11 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         if hasExternalKeyboard == false {textField.resignFirstResponder()}
         
         if textField.text != "" {
-            textView?.text.append(textField.text!)
-            textView?.text.append("\n")
-            scrollToBottom()
+            // Send the new message to the icbController, which will handle it like any other ICB message.
+            let sender = NSMutableAttributedString(string: "")
+            let text   = NSAttributedString(string: textField.text!)
+            
+            IcbDelegate.icbController.displayMessage(sender: sender, text: text)
 
             IcbDelegate.icbController.parseUserInput(textField.text!)
             textField.text = ""

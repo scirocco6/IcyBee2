@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C41b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-8D-HIK">
-                                <rect key="frame" x="0.0" y="738" width="703" height="30"/>
+                                <rect key="frame" x="0.0" y="738" width="702.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -46,8 +46,8 @@
                                     <outlet property="delegate" destination="JEX-9P-axG" id="P4m-0t-XkC"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFF-3O-Gkc">
-                                <rect key="frame" x="0.0" y="64" width="703" height="674"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFF-3O-Gkc" customClass="MessageView" customModule="IcyBee" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="702.5" height="674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -70,7 +70,6 @@
                     <connections>
                         <outlet property="bottomLayoutConstraint" destination="Z68-rN-Jnb" id="mte-X8-K5o"/>
                         <outlet property="inputLine" destination="PAJ-8D-HIK" id="LSl-l5-iyr"/>
-                        <outlet property="textView" destination="qFF-3O-Gkc" id="6ea-Sr-IiF"/>
                         <outlet property="titleBar" destination="mOI-FS-AaM" id="c7P-c7-qu7"/>
                     </connections>
                 </viewController>
