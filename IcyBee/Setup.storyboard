@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ico-29-IDO">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Setup View Controller-->
+        <scene sceneID="2w0-Ni-M0P">
+            <objects>
+                <viewController id="Ico-29-IDO" customClass="SetupViewController" customModule="IcyBee" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ou8-yz-Yvl"/>
+                        <viewControllerLayoutGuide type="bottom" id="WUk-HE-O3z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YLr-w0-2pT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29d-ZX-rQT">
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="MVx-32-48o" kind="show" id="A2i-75-9GT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="29d-ZX-rQT" firstAttribute="top" secondItem="ou8-yz-Yvl" secondAttribute="bottom" id="Z6d-ff-qMU"/>
+                            <constraint firstItem="29d-ZX-rQT" firstAttribute="leading" secondItem="YLr-w0-2pT" secondAttribute="leadingMargin" id="a2v-ay-1eq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="29d-ZX-rQT" secondAttribute="trailing" id="fNw-NZ-BGI"/>
+                            <constraint firstItem="WUk-HE-O3z" firstAttribute="top" secondItem="29d-ZX-rQT" secondAttribute="bottom" id="tgu-FK-Ca9"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oHP-xV-9Jy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-150" y="-215"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="D7N-ib-G7m">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="MVx-32-48o" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mtj-Ec-RQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="571" y="-216"/>
+        </scene>
+    </scenes>
+</document>

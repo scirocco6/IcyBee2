@@ -9,20 +9,13 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as! UISplitViewController
-        splitViewController.maximumPrimaryColumnWidth = 200
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-        splitViewController.delegate = self
 
-        IcbDelegate.icbController.connect()
-        
         return true
     }
 
@@ -47,25 +40,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    // MARK: - Split view
-
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-        
-//
-// should we allow an empty message area?  ie a discarded controller
-// the code below is from the original template and most likely we will just discard this
-//        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-//        guard let topAsDetailController = secondaryAsNavController.topViewController as? ChatViewController else { return false }
-//        if topAsDetailController.detailItem == nil {
-//            // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-//            return true
-//        }
-        
-        return false
-    }
-    
-    // MARK: - shared delegate
-    //static var sharedDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 }
 

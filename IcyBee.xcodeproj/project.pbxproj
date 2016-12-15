@@ -16,14 +16,21 @@
 		4F9A16191DE3C9DD0040960F /* IcyBeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16181DE3C9DD0040960F /* IcyBeeTests.swift */; };
 		4F9A16241DE3C9DD0040960F /* IcyBeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16231DE3C9DD0040960F /* IcyBeeUITests.swift */; };
 		4F9A169D1DE3CA9E0040960F /* IcbKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A168B1DE3CA570040960F /* IcbKit.framework */; };
-		4F9A169E1DE3CA9E0040960F /* RegExKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; };
-		4F9A16A61DE3CF7E0040960F /* IcbKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A168B1DE3CA570040960F /* IcbKit.framework */; };
 		4F9A16A71DE3CF7E0040960F /* IcbKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A168B1DE3CA570040960F /* IcbKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F9A16AB1DE3CF820040960F /* RegExKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; };
 		4F9A16AC1DE3CF820040960F /* RegExKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B31DE4E7460040960F /* NicknameCell.swift */; };
 		4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B51DE51F000040960F /* IcbDelegate.swift */; };
 		4FCA2AE31DEFCD9E00391CCA /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */; };
+		4FF8D4A81E023B3200BC5610 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */; };
+		4FF8D4A91E023B3200BC5610 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */; };
+		4FF8D4AA1E023B3200BC5610 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */; };
+		4FF8D4AE1E023C9A00BC5610 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */; };
+		4FF8D4AF1E023C9A00BC5610 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */; };
+		4FF8D4B01E023C9A00BC5610 /* Setup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */; };
+		4FF8D4B21E023CED00BC5610 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */; };
+		4FF8D4B31E023CED00BC5610 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */; };
+		4FF8D4B41E023CED00BC5610 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +141,9 @@
 		4F9A16B31DE4E7460040960F /* NicknameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
 		4F9A16B51DE51F000040960F /* IcbDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IcbDelegate.swift; sourceTree = "<group>"; };
 		4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setup.storyboard; sourceTree = "<group>"; };
+		4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +153,6 @@
 			files = (
 				4F9A169D1DE3CA9E0040960F /* IcbKit.framework in Frameworks */,
 				4F9A16AB1DE3CF820040960F /* RegExKit.framework in Frameworks */,
-				4F9A16A61DE3CF7E0040960F /* IcbKit.framework in Frameworks */,
-				4F9A169E1DE3CA9E0040960F /* RegExKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +185,8 @@
 		4F019DBE1DE53824003F9E60 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */,
+				4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */,
 				4F9A16031DE3C9DD0040960F /* MasterViewController.swift */,
 				4F9A16051DE3C9DD0040960F /* ChatViewController.swift */,
 			);
@@ -196,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				4F9A160C1DE3C9DD0040960F /* LaunchScreen.storyboard */,
+				4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */,
 				4F9A16071DE3C9DD0040960F /* Main.storyboard */,
 			);
 			name = Storyboards;
@@ -356,7 +367,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = six;
 				TargetAttributes = {
 					4F9A15FD1DE3C9DD0040960F = {
@@ -444,6 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FF8D4AE1E023C9A00BC5610 /* Setup.storyboard in Resources */,
 				4F9A160E1DE3C9DD0040960F /* LaunchScreen.storyboard in Resources */,
 				4F9A160B1DE3C9DD0040960F /* Assets.xcassets in Resources */,
 				4F9A16091DE3C9DD0040960F /* Main.storyboard in Resources */,
@@ -454,6 +466,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FF8D4AF1E023C9A00BC5610 /* Setup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FF8D4B01E023C9A00BC5610 /* Setup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +489,8 @@
 				4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */,
 				4F9A16061DE3C9DD0040960F /* ChatViewController.swift in Sources */,
 				4F9A16041DE3C9DD0040960F /* MasterViewController.swift in Sources */,
+				4FF8D4B21E023CED00BC5610 /* SetupViewController.swift in Sources */,
+				4FF8D4A81E023B3200BC5610 /* SplitViewController.swift in Sources */,
 				4F9A16021DE3C9DD0040960F /* AppDelegate.swift in Sources */,
 				4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */,
 			);
@@ -484,6 +500,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FF8D4A91E023B3200BC5610 /* SplitViewController.swift in Sources */,
+				4FF8D4B31E023CED00BC5610 /* SetupViewController.swift in Sources */,
 				4F9A16191DE3C9DD0040960F /* IcyBeeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +510,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FF8D4AA1E023B3200BC5610 /* SplitViewController.swift in Sources */,
+				4FF8D4B41E023CED00BC5610 /* SetupViewController.swift in Sources */,
 				4F9A16241DE3C9DD0040960F /* IcyBeeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,6 +589,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -619,6 +640,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
