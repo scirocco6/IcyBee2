@@ -11,7 +11,9 @@ import UIKit
 class SetupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if (UserDefaults.standard.string(forKey: "nick_preferences") != nil) {
+            IcbDelegate.icbController.connect()
+        }
     }
 
     override func didReceiveMemoryWarning() {

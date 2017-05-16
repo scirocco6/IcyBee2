@@ -31,6 +31,12 @@
 		4FF8D4B21E023CED00BC5610 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */; };
 		4FF8D4B31E023CED00BC5610 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */; };
 		4FF8D4B41E023CED00BC5610 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */; };
+		4FFD2E431E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */; };
+		4FFD2E441E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */; };
+		4FFD2E451E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */; };
+		4FFD2E4B1E09CF7500781377 /* CoreDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */; };
+		4FFD2E4C1E09CF7500781377 /* CoreDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */; };
+		4FFD2E4D1E09CF7500781377 /* CoreDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +150,8 @@
 		4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setup.storyboard; sourceTree = "<group>"; };
 		4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IcyBee_Core_Data.xcdatamodel; sourceTree = "<group>"; };
+		4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStructs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +265,7 @@
 				4F019DBD1DE5380D003F9E60 /* Delegates */,
 				4F019DBE1DE53824003F9E60 /* ViewControllers */,
 				4F019DBF1DE53834003F9E60 /* Views */,
+				4FFD2E3F1E09C4FD00781377 /* Models */,
 				4F019DC11DE53880003F9E60 /* Assets */,
 				4F019DC21DE53887003F9E60 /* Plists */,
 			);
@@ -297,6 +306,15 @@
 				4F9A168D1DE3CA570040960F /* IcbKitTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4FFD2E3F1E09C4FD00781377 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */,
+				4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,10 +505,12 @@
 			files = (
 				4FCA2AE31DEFCD9E00391CCA /* MessageView.swift in Sources */,
 				4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */,
+				4FFD2E431E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16061DE3C9DD0040960F /* ChatViewController.swift in Sources */,
 				4F9A16041DE3C9DD0040960F /* MasterViewController.swift in Sources */,
 				4FF8D4B21E023CED00BC5610 /* SetupViewController.swift in Sources */,
 				4FF8D4A81E023B3200BC5610 /* SplitViewController.swift in Sources */,
+				4FFD2E4B1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
 				4F9A16021DE3C9DD0040960F /* AppDelegate.swift in Sources */,
 				4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */,
 			);
@@ -502,6 +522,8 @@
 			files = (
 				4FF8D4A91E023B3200BC5610 /* SplitViewController.swift in Sources */,
 				4FF8D4B31E023CED00BC5610 /* SetupViewController.swift in Sources */,
+				4FFD2E4C1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
+				4FFD2E441E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16191DE3C9DD0040960F /* IcyBeeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +534,8 @@
 			files = (
 				4FF8D4AA1E023B3200BC5610 /* SplitViewController.swift in Sources */,
 				4FF8D4B41E023CED00BC5610 /* SetupViewController.swift in Sources */,
+				4FFD2E4D1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
+				4FFD2E451E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16241DE3C9DD0040960F /* IcyBeeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

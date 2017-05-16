@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 import AudioToolbox
 import IcbKit
 import RegExKit
@@ -15,8 +16,18 @@ import RegExKit
 class IcbDelegate: FNProtocolDelegate {
     public static let icbController = IcbDelegate()
 
+    // Core Data
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var messages: NSEntityDescription
+    var managedContext: NSManagedObjectContext
+    
     let courierNormal = UIFont(name: "Courier", size: 16)
 
+    init() {
+        managedContext = appDelegate.persistentContainer.viewContext
+        messages =  NSEntityDescription.entity(forEntityName: "ChatMessage", in:managedContext)!
+    }
+    
     func connect() {
         icbConnect(delegate: self)
     }
