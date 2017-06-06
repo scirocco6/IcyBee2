@@ -180,9 +180,10 @@ class IcbDelegate: FNProtocolDelegate {
         }
         else {
             // boo something went wrong
-            // usually we are already logged in else where and need to drop or change username
-            // we may have bad password
+            // usually we are already logged in elsewhere and need to drop or change username
+            // we may have a bad password
             // or have tried to join a group we aren't allowed to join
+            //
         }
     }
     
@@ -203,7 +204,9 @@ class IcbDelegate: FNProtocolDelegate {
             case .arrive, .depart: handlePresenceMessage(from: from, text: text)
             }
         }
-        else {displayStatusMessage(from: from, text: text)}
+        else {
+            displayStatusMessage(from: from, text: text)
+        }
         
     }
 
