@@ -16,12 +16,12 @@ import RegExKit
 class IcbDelegate: FNProtocolDelegate {
     public static let icbController = IcbDelegate()
 
+    let courierNormal = UIFont(name: "Courier", size: 16)
+
     // Core Data
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var messages: NSEntityDescription
     var managedContext: NSManagedObjectContext
-    
-    let courierNormal = UIFont(name: "Courier", size: 16)
 
     init() {
         managedContext = appDelegate.persistentContainer.viewContext
