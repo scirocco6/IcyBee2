@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IcbKit
 
 class SetupViewController: UIViewController {
     override func viewDidLoad() {
