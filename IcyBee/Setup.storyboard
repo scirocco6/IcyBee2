@@ -22,32 +22,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPQ-zR-ypt">
-                                <rect key="frame" x="84" y="178" width="101" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyG-Xy-l5h">
                                 <rect key="frame" x="84" y="140" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ARQ-tQ-2yf">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="required" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ARQ-tQ-2yf">
                                 <rect key="frame" x="193" y="135" width="97" height="30"/>
+                                <accessibility key="accessibilityConfiguration" hint="The name you want other people to see" label="NIckname">
+                                    <accessibilityTraits key="traits" selected="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="9xV-fr-G4x"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ico-29-IDO" id="zcE-hB-va9"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bj8-qA-Z24">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPQ-zR-ypt">
+                                <rect key="frame" x="84" y="178" width="101" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="required" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bj8-qA-Z24" userLabel="Channel">
                                 <rect key="frame" x="193" y="173" width="97" height="30"/>
+                                <accessibility key="accessibilityConfiguration" hint="THe channel you want to start in" label="Channel"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ico-29-IDO" id="FsD-Og-p9X"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="et4-gI-vmk">
                                 <rect key="frame" x="84" y="224" width="101" height="21"/>
@@ -55,49 +65,71 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hDt-1E-263">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="required" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hDt-1E-263" userLabel="Password">
                                 <rect key="frame" x="193" y="219" width="97" height="30"/>
+                                <accessibility key="accessibilityConfiguration" hint="The password you wish to use" label="Password"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ico-29-IDO" id="mT9-w4-0Vg"/>
+                                </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-vk-n7K">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-vk-n7K" userLabel="Password confirmation">
                                 <rect key="frame" x="84" y="262" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUY-rk-4BX">
+                            <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="required" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUY-rk-4BX" userLabel="Password confirmation">
                                 <rect key="frame" x="193" y="257" width="97" height="30"/>
+                                <accessibility key="accessibilityConfiguration" hint="The pasword you wish to use.  Both this confirm field and the password field above must be the same" label="Password confirmation"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ico-29-IDO" id="d6r-P0-bZF"/>
+                                </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29d-ZX-rQT">
-                                <rect key="frame" x="133" y="310" width="109" height="47"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-o6-AOS" userLabel="Welcome">
+                                <rect key="frame" x="67" y="20" width="240" height="103"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="103" id="bjd-yD-9L3"/>
+                                </constraints>
+                                <string key="text">Welcom to ICB, The Worlds longest running chat system.  To get started please select a nickname for people to see you as, a starting channel, and a password.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" bounces="NO" scrollEnabled="NO" editable="NO" text="The password field and the confirmation field do not match." textAlignment="center" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvL-W5-8ec" userLabel="Problems display">
+                                <rect key="frame" x="67" y="295" width="240" height="61"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration" label="Problem display">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29d-ZX-rQT">
+                                <rect key="frame" x="133" y="364" width="109" height="47"/>
+                                <accessibility key="accessibilityConfiguration" hint="Press this button to join ICB" label="Join Button"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="5GO-u2-J0Y"/>
                                     <constraint firstAttribute="width" constant="109" id="fuq-Ok-R5z"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <state key="normal" title="Join"/>
                                 <connections>
-                                    <segue destination="MVx-32-48o" kind="show" id="A2i-75-9GT"/>
+                                    <segue destination="MVx-32-48o" kind="show" identifier="joinIcb" id="A2i-75-9GT"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-o6-AOS">
-                                <rect key="frame" x="67" y="20" width="240" height="103"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Welcom to ICB, The Worlds longest running chat system.  To get started please select a nickname for people to see you as, a starting channel, and a password.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ARQ-tQ-2yf" firstAttribute="leading" secondItem="Bj8-qA-Z24" secondAttribute="leading" id="29O-E7-ToE"/>
                             <constraint firstItem="ARQ-tQ-2yf" firstAttribute="leading" secondItem="hyG-Xy-l5h" secondAttribute="trailing" constant="8" symbolic="YES" id="2P9-LP-Wv6"/>
-                            <constraint firstItem="WUk-HE-O3z" firstAttribute="top" secondItem="29d-ZX-rQT" secondAttribute="bottom" constant="310" id="2yb-ZM-x6s"/>
                             <constraint firstItem="Bj8-qA-Z24" firstAttribute="top" secondItem="ARQ-tQ-2yf" secondAttribute="bottom" constant="8" symbolic="YES" id="6tx-np-AB8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ARQ-tQ-2yf" secondAttribute="trailing" constant="69" id="9ck-aJ-cOB"/>
                             <constraint firstItem="hDt-1E-263" firstAttribute="leading" secondItem="lUY-rk-4BX" secondAttribute="leading" id="FhT-2q-EXp"/>
@@ -106,15 +138,18 @@
                             <constraint firstItem="Bj8-qA-Z24" firstAttribute="trailing" secondItem="hDt-1E-263" secondAttribute="trailing" id="NUZ-HW-f3E"/>
                             <constraint firstItem="et4-gI-vmk" firstAttribute="centerY" secondItem="hDt-1E-263" secondAttribute="centerY" id="PIL-vr-xPa"/>
                             <constraint firstItem="hDt-1E-263" firstAttribute="top" secondItem="Bj8-qA-Z24" secondAttribute="bottom" constant="16" id="Q5s-Hd-S7M"/>
+                            <constraint firstItem="GKP-o6-AOS" firstAttribute="leading" secondItem="mvL-W5-8ec" secondAttribute="leading" id="Sxh-NF-jaN"/>
                             <constraint firstItem="lUY-rk-4BX" firstAttribute="top" secondItem="hDt-1E-263" secondAttribute="bottom" constant="8" symbolic="YES" id="Toz-Vu-Bg8"/>
+                            <constraint firstItem="WUk-HE-O3z" firstAttribute="top" secondItem="29d-ZX-rQT" secondAttribute="bottom" constant="256" id="Ty9-qc-sig"/>
                             <constraint firstItem="GKP-o6-AOS" firstAttribute="top" secondItem="ou8-yz-Yvl" secondAttribute="bottom" id="VYc-6p-5z6"/>
                             <constraint firstItem="ARQ-tQ-2yf" firstAttribute="top" secondItem="GKP-o6-AOS" secondAttribute="bottom" constant="12" id="Vht-fJ-lt3"/>
                             <constraint firstItem="Bj8-qA-Z24" firstAttribute="leading" secondItem="hDt-1E-263" secondAttribute="leading" id="VjJ-YD-Lbs"/>
+                            <constraint firstItem="GKP-o6-AOS" firstAttribute="trailing" secondItem="mvL-W5-8ec" secondAttribute="trailing" id="XEz-2t-bC4"/>
+                            <constraint firstItem="mvL-W5-8ec" firstAttribute="top" secondItem="lUY-rk-4BX" secondAttribute="bottom" constant="8" symbolic="YES" id="XLS-yQ-nji"/>
                             <constraint firstItem="WPQ-zR-ypt" firstAttribute="leading" secondItem="et4-gI-vmk" secondAttribute="leading" id="aYl-Tk-tV0"/>
                             <constraint firstItem="et4-gI-vmk" firstAttribute="leading" secondItem="qyA-vk-n7K" secondAttribute="leading" id="adn-ex-dul"/>
-                            <constraint firstItem="29d-ZX-rQT" firstAttribute="centerY" secondItem="YLr-w0-2pT" secondAttribute="centerY" id="bUk-L0-w7x"/>
+                            <constraint firstItem="29d-ZX-rQT" firstAttribute="top" secondItem="mvL-W5-8ec" secondAttribute="bottom" constant="8" symbolic="YES" id="cnc-vq-5oH"/>
                             <constraint firstItem="GKP-o6-AOS" firstAttribute="leading" secondItem="YLr-w0-2pT" secondAttribute="leadingMargin" constant="51" id="dk7-co-bHh"/>
-                            <constraint firstItem="29d-ZX-rQT" firstAttribute="top" secondItem="lUY-rk-4BX" secondAttribute="bottom" constant="23" id="e02-7N-FcD"/>
                             <constraint firstItem="hyG-Xy-l5h" firstAttribute="leading" secondItem="WPQ-zR-ypt" secondAttribute="leading" id="fSK-X0-jUS"/>
                             <constraint firstItem="qyA-vk-n7K" firstAttribute="centerY" secondItem="lUY-rk-4BX" secondAttribute="centerY" id="fmn-jo-Gat"/>
                             <constraint firstItem="Bj8-qA-Z24" firstAttribute="leading" secondItem="WPQ-zR-ypt" secondAttribute="trailing" constant="8" symbolic="YES" id="gjx-bX-ZW3"/>
@@ -127,6 +162,13 @@
                             <constraint firstItem="WPQ-zR-ypt" firstAttribute="centerY" secondItem="Bj8-qA-Z24" secondAttribute="centerY" id="wor-5W-A63"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="channel" destination="Bj8-qA-Z24" id="bCN-8E-Eh7"/>
+                        <outlet property="confirm" destination="lUY-rk-4BX" id="Umn-Fn-yhK"/>
+                        <outlet property="nickname" destination="ARQ-tQ-2yf" id="kSu-RU-Gfv"/>
+                        <outlet property="password" destination="hDt-1E-263" id="kTr-Tj-shE"/>
+                        <outlet property="problems" destination="mvL-W5-8ec" id="6ar-js-DNX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHP-xV-9Jy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
