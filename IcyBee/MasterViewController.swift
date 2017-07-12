@@ -16,8 +16,10 @@ class MasterViewController: UITableViewController {
     var objects = [Any]()
 
     var currentGroupName: String? {
-        didSet{
+        didSet {
             titleBar?.title = currentGroupName
+            self.title      = currentGroupName
+            self.splitViewController?.displayModeButtonItem.title = currentGroupName
         }
     }
     var currentGroup: FNGroup?
