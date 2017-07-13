@@ -13,9 +13,9 @@ import CoreData
 @UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    
+    // Override point for customization after application launch.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        registerSettingsBundle()
 
         return true
     }
@@ -43,6 +43,53 @@ import CoreData
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    // MARK: - User default settings
+
+    func registerSettingsBundle() {
+        let appDefaults: [String:AnyObject] = [
+            "server_preference": "default.icb.net" as AnyObject,
+            "port_preference": "7326" as AnyObject,
+            "channel_preference": "IcyBee" as AnyObject
+        ]
+
+        UserDefaults.standard.register(defaults: appDefaults)
+    }
+    
+    
+//    func setupDefaults() {
+//        // get the plist location from the settings bundle
+//        let plistPath = Bundle.main.bundlePath.appending("/Settings.bundle/Root.plist")
+//
+//        // TODO: - Swiftify this
+//        // get the preference specifiers array which contains the settings
+//        
+//        let settingsDictionary = NSDictionary(contentsOfFile: plistPath)
+//        
+//        if let fileUrl = Bundle.main.url(forResource: "Root", withExtension: "plist"),
+//            let data = try? Data(contentsOf: fileUrl) {
+//            if let result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [[String: Any]] { // [String: Any] which ever it is
+//                print(result)
+//            }
+//        }
+//        let preferencesArray:[NSDictionary] = settingsDictionary?.object(forKey: "PreferenceSpecifiers") as! [NSDictionary]
+//        
+//        // use the shared defaults object
+//        let defaults = UserDefaults.standard
+
+        // for each preference item, set its default if there is no value set
+//        for item in preferencesArray {
+//            if let key = item["key"] {
+//                if defaults.object(forKey: key as! String) == nil {
+//                    if let defaultValue = item["DefaultValue"] {
+//                        defaults.set(defaultValue, forKey: key as! String)
+//                    }
+//                }
+//            }
+//        }
+//        defaults.synchronize //write the changes to disk
+//    }
     
     // MARK: - Core Data stack
     

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F58302A1F17DFED0077999C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F5830291F17DFED0077999C /* Settings.bundle */; };
+		4F58302B1F17DFED0077999C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F5830291F17DFED0077999C /* Settings.bundle */; };
+		4F58302C1F17DFED0077999C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F5830291F17DFED0077999C /* Settings.bundle */; };
 		4F9A16021DE3C9DD0040960F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16011DE3C9DD0040960F /* AppDelegate.swift */; };
 		4F9A16041DE3C9DD0040960F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16031DE3C9DD0040960F /* MasterViewController.swift */; };
 		4F9A16061DE3C9DD0040960F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16051DE3C9DD0040960F /* ChatViewController.swift */; };
@@ -128,6 +131,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F5830291F17DFED0077999C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4F9A15FE1DE3C9DD0040960F /* IcyBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IcyBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F9A16011DE3C9DD0040960F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F9A16031DE3C9DD0040960F /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 		4F019DC21DE53887003F9E60 /* Plists */ = {
 			isa = PBXGroup;
 			children = (
+				4F5830291F17DFED0077999C /* Settings.bundle */,
 				4F9A160F1DE3C9DD0040960F /* Info.plist */,
 			);
 			name = Plists;
@@ -475,6 +480,7 @@
 			files = (
 				4FF8D4AE1E023C9A00BC5610 /* Setup.storyboard in Resources */,
 				4F9A160E1DE3C9DD0040960F /* LaunchScreen.storyboard in Resources */,
+				4F58302A1F17DFED0077999C /* Settings.bundle in Resources */,
 				4F9A160B1DE3C9DD0040960F /* Assets.xcassets in Resources */,
 				4F9A16091DE3C9DD0040960F /* Main.storyboard in Resources */,
 			);
@@ -484,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F58302B1F17DFED0077999C /* Settings.bundle in Resources */,
 				4FF8D4AF1E023C9A00BC5610 /* Setup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +499,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F58302C1F17DFED0077999C /* Settings.bundle in Resources */,
 				4FF8D4B01E023C9A00BC5610 /* Setup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

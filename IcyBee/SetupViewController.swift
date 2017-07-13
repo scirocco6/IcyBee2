@@ -17,10 +17,16 @@ class SetupViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var problems: UITextView!
 
+    let preferences = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (UserDefaults.standard.string(forKey: "nick_preferences") != nil) {
+        if (preferences.string(forKey: "nick_preference") != nil) {
             IcbDelegate.icbController.connect()
+        }
+        
+        if let preferedChannel = preferences.string(forKey: "channel_preference") {
+            channel.text = preferedChannel
         }
     }
 
