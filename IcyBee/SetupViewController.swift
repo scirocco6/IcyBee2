@@ -21,15 +21,12 @@ class SetupViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (preferences.string(forKey: "nick_preference") != nil) {
-            IcbDelegate.icbController.connect()
-        }
         
         if let preferedChannel = preferences.string(forKey: "channel_preference") {
             channel.text = preferedChannel
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -87,15 +84,12 @@ class SetupViewController: UIViewController, UITextFieldDelegate {
         }
         
         preferences.set(nickname.text, forKey: "nick_preference")
-        preferences.set(channel.text, forKey: "channel_preference")
+        preferences.set(channel.text,  forKey: "channel_preference")
         preferences.set(password.text, forKey: "pass_preference")
 
-        
+        preferences.synchronize()
         return setupComplete
-        
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        IcbDelegate.icbController.connect()
-    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {}
 }

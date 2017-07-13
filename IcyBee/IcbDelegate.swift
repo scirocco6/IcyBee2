@@ -16,6 +16,7 @@ import RegExKit
 class IcbDelegate: FNProtocolDelegate {
     public static let icbController = IcbDelegate()
 
+    let preferences   = UserDefaults.standard
     let courierNormal = UIFont(name: "Courier", size: 16)
 
     // Core Data
@@ -29,6 +30,14 @@ class IcbDelegate: FNProtocolDelegate {
     }
     
     func connect() {
+        icbClientID = "IcyBee2"
+        icbServer   = preferences.string(forKey: "server_preference")!
+        // TODO: - Convert this to an int
+        icbPort     = Int(preferences.string(forKey: "port_preference")!)!
+        icbChannel  = preferences.string(forKey: "channel_preference")!
+        icbNickname = preferences.string(forKey: "nick_preference")!
+        icbPassword = preferences.string(forKey: "pass_preference")!
+        
         icbConnect(delegate: self)
     }
     

@@ -121,7 +121,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <state key="normal" title="Join"/>
                                 <connections>
-                                    <segue destination="MVx-32-48o" kind="show" identifier="joinIcb" id="A2i-75-9GT"/>
+                                    <segue destination="MVx-32-48o" kind="showDetail" identifier="joinIcb" action="showViewController:sender:" id="A2i-75-9GT"/>
                                 </connections>
                             </button>
                         </subviews>

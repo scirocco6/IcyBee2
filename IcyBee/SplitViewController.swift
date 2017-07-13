@@ -18,6 +18,24 @@ class SplitViewController: UISplitViewController {
         navigationController.topViewController!.navigationItem.leftBarButtonItem = self.displayModeButtonItem
     }
 
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+
+        let preferences = UserDefaults.standard
+
+        if preferences.string(forKey: "channel_preference")  == nil ||
+            preferences.string(forKey: "nick_preference") == nil ||
+            preferences.string(forKey: "pass_preference") == nil {
+            
+            performSegue(withIdentifier: "showSetup", sender: nil)
+        }
+        else {
+            // TODO: - IcbDelegate.icbController.connect() really doesn't belong here
+            IcbDelegate.icbController.connect()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
