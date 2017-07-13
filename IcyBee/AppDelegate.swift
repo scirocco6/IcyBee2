@@ -57,40 +57,6 @@ import CoreData
         UserDefaults.standard.register(defaults: appDefaults)
     }
     
-    
-//    func setupDefaults() {
-//        // get the plist location from the settings bundle
-//        let plistPath = Bundle.main.bundlePath.appending("/Settings.bundle/Root.plist")
-//
-//        // TODO: - Swiftify this
-//        // get the preference specifiers array which contains the settings
-//        
-//        let settingsDictionary = NSDictionary(contentsOfFile: plistPath)
-//        
-//        if let fileUrl = Bundle.main.url(forResource: "Root", withExtension: "plist"),
-//            let data = try? Data(contentsOf: fileUrl) {
-//            if let result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [[String: Any]] { // [String: Any] which ever it is
-//                print(result)
-//            }
-//        }
-//        let preferencesArray:[NSDictionary] = settingsDictionary?.object(forKey: "PreferenceSpecifiers") as! [NSDictionary]
-//        
-//        // use the shared defaults object
-//        let defaults = UserDefaults.standard
-
-        // for each preference item, set its default if there is no value set
-//        for item in preferencesArray {
-//            if let key = item["key"] {
-//                if defaults.object(forKey: key as! String) == nil {
-//                    if let defaultValue = item["DefaultValue"] {
-//                        defaults.set(defaultValue, forKey: key as! String)
-//                    }
-//                }
-//            }
-//        }
-//        defaults.synchronize //write the changes to disk
-//    }
-    
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
