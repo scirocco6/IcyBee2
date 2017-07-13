@@ -86,7 +86,13 @@ class SetupViewController: UIViewController, UITextFieldDelegate {
             problems.isHidden = false
         }
         
+        preferences.set(nickname.text, forKey: "nick_preference")
+        preferences.set(channel.text, forKey: "channel_preference")
+        preferences.set(password.text, forKey: "pass_preference")
+
+        
         return setupComplete
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
