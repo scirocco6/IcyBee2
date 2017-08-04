@@ -20,13 +20,15 @@ class IcbDelegate: FNProtocolDelegate {
     let courierNormal = UIFont(name: "Courier", size: 16)
 
     // Core Data
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var messages: NSEntityDescription
+    let dataContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     var managedContext: NSManagedObjectContext
+    var messages: NSEntityDescription
 
     init() {
-        managedContext = appDelegate.persistentContainer.viewContext
-        messages =  NSEntityDescription.entity(forEntityName: "ChatMessage", in:managedContext)!
+        managedContext = dataContainer.viewContext
+        
+        // TODO: - I don't know how it could ever fail here but handle better               --v
+        messages = NSEntityDescription.entity(forEntityName: "ChatMessage", in:managedContext)!
     }
     
     func connect() {
@@ -216,14 +218,29 @@ class IcbDelegate: FNProtocolDelegate {
         else {
             displayStatusMessage(from: from, text: text)
         }
-        
     }
 
     func icbReceiveOpenMessage(from: String, text: String) {
-        let from = NSAttributedString(string:"<\(from)>")
-        let text = NSAttributedString(string: text)
+        let nickname = NSAttributedString(string:"<\(from)>")
+        let message  = NSAttributedString(string: text)
         
-        displayMessage(sender: from, text: text)
+        let chatMessage = ChatMessage(context: managedContext)
+        chatMessage.sender = from
+        chatMessage.text = text
+        chatMessage.timeStamp = Date() as NSDate
+        chatMessage.type = String(FNMessageType.open.rawValue)
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        displayMessage(sender: nickname, text: message)
+        
+        
+        
+        do {
+            let messages = try managedContext.fetch(ChatMessage.fetchRequest()) as! [NSManagedObject]
+            print(messages.count)
+        } catch {} // TODO: - error handling?
+        
     }
     
     func icbReceivePersonalMessage(from: String, text: String) {

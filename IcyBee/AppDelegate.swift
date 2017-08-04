@@ -16,7 +16,8 @@ import CoreData
     // Override point for customization after application launch.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         registerSettingsBundle()
-
+        clearOldSession()
+        
         return true
     }
 
@@ -86,6 +87,18 @@ import CoreData
         return container
     }()
     
+    // MARK: - Core Data Empty Table
+    func clearOldSession() {
+        let context = persistentContainer.viewContext
+
+        do {
+            let messages = try context.fetch(ChatMessage.fetchRequest()) as! [NSManagedObject]
+            for message in messages {
+                context.delete(message)
+            }
+        } catch {} // TODO: - error handling?
+    }
+
     // MARK: - Core Data Saving support
     
     func saveContext () {
