@@ -233,14 +233,6 @@ class IcbDelegate: FNProtocolDelegate {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         displayMessage(sender: nickname, text: message)
-        
-        
-        
-        do {
-            let messages = try managedContext.fetch(ChatMessage.fetchRequest()) as! [NSManagedObject]
-            print(messages.count)
-        } catch {} // TODO: - error handling?
-        
     }
     
     func icbReceivePersonalMessage(from: String, text: String) {
