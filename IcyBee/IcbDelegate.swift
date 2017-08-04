@@ -221,21 +221,17 @@ class IcbDelegate: FNProtocolDelegate {
     }
 
     func icbReceiveOpenMessage(from: String, text: String) {
+        addMessageToStore(type: FNMessageType.open, from: from, text: text)
+
         let nickname = NSAttributedString(string:"<\(from)>")
         let message  = NSAttributedString(string: text)
-        
-        let chatMessage = ChatMessage(context: managedContext)
-        chatMessage.sender = from
-        chatMessage.text = text
-        chatMessage.timeStamp = Date() as NSDate
-        chatMessage.type = String(FNMessageType.open.rawValue)
-        
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        
+
         displayMessage(sender: nickname, text: message)
     }
     
     func icbReceivePersonalMessage(from: String, text: String) {
+        addMessageToStore(type: FNMessageType.personal, from: from, text: text)
+
         let from = NSAttributedString(string:"<*\(from)*>")
         let text = NSAttributedString(string: text)
         
@@ -243,6 +239,8 @@ class IcbDelegate: FNProtocolDelegate {
     }
     
     func icbReceiveImportantMessage(from: String, text: String) {
+        addMessageToStore(type: FNMessageType.important, from: from, text: text)
+
         let from = NSAttributedString(string:"<=\(from)=>")
         let text = NSAttributedString(string: text)
         
@@ -250,6 +248,9 @@ class IcbDelegate: FNProtocolDelegate {
     }
     
     func icbReceiveErrorMessage(text: String) {
+        // TODO: - really???
+        addMessageToStore(type: FNMessageType.error, from: "Error", text: text)
+
         let from = NSAttributedString(string:"[=Error=]")
         let text = NSAttributedString(string: text)
         
@@ -257,6 +258,9 @@ class IcbDelegate: FNProtocolDelegate {
     }
     
     func icbReceiveBeepMessage(from: String) {
+        // TODO: - really???
+        addMessageToStore(type: FNMessageType.beep, from: "Beep", text: "has sent you a beep!")
+
         let sender = NSAttributedString(string:"[=Beep!=]")
         let text = NSAttributedString(string: " \(from) has sent you a beep!")
         
@@ -269,6 +273,9 @@ class IcbDelegate: FNProtocolDelegate {
     }
     
     func icbReceiveGenericOutput(text: String) {
+        // TODO: - really??? seems VERY clumsy
+        addMessageToStore(type: FNMessageType.error, from: "", text: text)
+
         let sender = NSMutableAttributedString(string: "")
         let text   = NSAttributedString(string: text)
         
@@ -284,4 +291,17 @@ class IcbDelegate: FNProtocolDelegate {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
         }
     }
+    
+    // MARK: - Core Data
+    
+    func addMessageToStore(type: FNMessageType, from: String, text: String) {
+        let chatMessage = ChatMessage(context: managedContext)
+        chatMessage.sender = from
+        chatMessage.text = text
+        chatMessage.timeStamp = Date() as NSDate
+        chatMessage.type = String(type.rawValue)
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+
 }
