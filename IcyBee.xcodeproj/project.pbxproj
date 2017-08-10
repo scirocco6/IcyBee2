@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0889CE1F3B9DDE00144846 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0889CD1F3B9DDE00144846 /* MessageCell.swift */; };
+		4F0889CF1F3B9DDE00144846 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0889CD1F3B9DDE00144846 /* MessageCell.swift */; };
+		4F0889D01F3B9DDE00144846 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0889CD1F3B9DDE00144846 /* MessageCell.swift */; };
 		4F58302A1F17DFED0077999C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F5830291F17DFED0077999C /* Settings.bundle */; };
 		4F58302B1F17DFED0077999C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F5830291F17DFED0077999C /* Settings.bundle */; };
 		4F58302C1F17DFED0077999C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F5830291F17DFED0077999C /* Settings.bundle */; };
@@ -131,6 +134,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F0889CD1F3B9DDE00144846 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		4F5830291F17DFED0077999C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4F9A15FE1DE3C9DD0040960F /* IcyBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IcyBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F9A16011DE3C9DD0040960F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				4F9A16B31DE4E7460040960F /* NicknameCell.swift */,
+				4F0889CD1F3B9DDE00144846 /* MessageCell.swift */,
 				4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */,
 			);
 			name = Views;
@@ -511,6 +516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F0889CE1F3B9DDE00144846 /* MessageCell.swift in Sources */,
 				4FCA2AE31DEFCD9E00391CCA /* MessageView.swift in Sources */,
 				4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */,
 				4FFD2E431E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
@@ -533,6 +539,7 @@
 				4FFD2E4C1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
 				4FFD2E441E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16191DE3C9DD0040960F /* IcyBeeTests.swift in Sources */,
+				4F0889CF1F3B9DDE00144846 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +552,7 @@
 				4FFD2E4D1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
 				4FFD2E451E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16241DE3C9DD0040960F /* IcyBeeUITests.swift in Sources */,
+				4F0889D01F3B9DDE00144846 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-8D-HIK">
-                                <rect key="frame" x="0.0" y="738" width="703" height="30"/>
+                                <rect key="frame" x="0.0" y="738" width="702.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -46,23 +46,53 @@
                                     <outlet property="delegate" destination="JEX-9P-axG" id="P4m-0t-XkC"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFF-3O-Gkc" customClass="MessageView" customModule="IcyBee" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4jp-Tt-mMZ">
                                 <rect key="frame" x="0.0" y="64" width="703" height="674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" shipmentTrackingNumber="YES" flightNumber="YES" lookupSuggestion="YES"/>
-                            </textView>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Chat Message" id="hhE-Zz-gaT" customClass="MessageCell" customModule="IcyBee" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="703" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hhE-Zz-gaT" id="iMp-wz-Huh">
+                                            <rect key="frame" x="0.0" y="0.0" width="703" height="1"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ax1-eD-D7x">
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="1"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
+                                                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" shipmentTrackingNumber="YES" flightNumber="YES" lookupSuggestion="YES"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ax1-eD-D7x" firstAttribute="leading" secondItem="iMp-wz-Huh" secondAttribute="leading" id="D2M-xP-cbv"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ax1-eD-D7x" secondAttribute="bottom" id="KwY-WZ-xeH"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ax1-eD-D7x" secondAttribute="trailing" id="ht9-HF-KK5"/>
+                                                <constraint firstItem="Ax1-eD-D7x" firstAttribute="top" secondItem="iMp-wz-Huh" secondAttribute="top" id="sEz-3M-n64"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="message" destination="Ax1-eD-D7x" id="Nqg-87-djd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="JEX-9P-axG" id="Zu1-r6-EBu"/>
+                                    <outlet property="delegate" destination="JEX-9P-axG" id="jTu-Tq-xk3"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="qFF-3O-Gkc" secondAttribute="trailing" id="4xA-q7-SON"/>
-                            <constraint firstItem="qFF-3O-Gkc" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="UOW-Yq-uuu"/>
-                            <constraint firstItem="qFF-3O-Gkc" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="WqS-uB-lqE"/>
+                            <constraint firstItem="PAJ-8D-HIK" firstAttribute="top" secondItem="4jp-Tt-mMZ" secondAttribute="bottom" id="41n-Rh-0tm"/>
+                            <constraint firstItem="4jp-Tt-mMZ" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="Ak1-qi-X0V"/>
                             <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="PAJ-8D-HIK" secondAttribute="bottom" id="Z68-rN-Jnb"/>
                             <constraint firstAttribute="trailing" secondItem="PAJ-8D-HIK" secondAttribute="trailing" id="bcK-Fz-PkU"/>
+                            <constraint firstAttribute="trailing" secondItem="4jp-Tt-mMZ" secondAttribute="trailing" id="c3N-G4-X0p"/>
+                            <constraint firstItem="4jp-Tt-mMZ" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="pGx-se-glO"/>
                             <constraint firstItem="PAJ-8D-HIK" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="sdO-gu-fZn"/>
-                            <constraint firstItem="PAJ-8D-HIK" firstAttribute="top" secondItem="qFF-3O-Gkc" secondAttribute="bottom" id="uPp-k4-F4S"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -70,6 +100,7 @@
                     <connections>
                         <outlet property="bottomLayoutConstraint" destination="Z68-rN-Jnb" id="mte-X8-K5o"/>
                         <outlet property="inputLine" destination="PAJ-8D-HIK" id="LSl-l5-iyr"/>
+                        <outlet property="tableView" destination="4jp-Tt-mMZ" id="0hB-hR-q62"/>
                         <outlet property="titleBar" destination="mOI-FS-AaM" id="c7P-c7-qu7"/>
                     </connections>
                 </viewController>

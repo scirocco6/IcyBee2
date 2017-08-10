@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ChatViewController: UIViewController, UITextFieldDelegate {
-    @IBOutlet var titleBar: UINavigationItem?
-    @IBOutlet var inputLine: UITextField?
-    @IBOutlet var bottomLayoutConstraint: NSLayoutConstraint?
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var titleBar: UINavigationItem!
+    @IBOutlet var inputLine: UITextField!
+    @IBOutlet var bottomLayoutConstraint: NSLayoutConstraint!
     
     let emptyString   = NSMutableAttributedString(string: "")
     var messageString = NSMutableAttributedString(string: "")
@@ -22,6 +23,10 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // needed to enable automatic row height
+        tableView.estimatedRowHeight = 10.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         // subscribe to topic change messages
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(ChatViewController.updateTopic(_:)),
@@ -78,7 +83,7 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
             keyboardHeight = (keyboardFrame?.size.height) ?? 0.0
         }
 
-        bottomLayoutConstraint?.constant = (keyboardFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : keyboardHeight
+        bottomLayoutConstraint.constant = (keyboardFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : keyboardHeight
         
         let duration             = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
         let animationCurveNumber =  userInfo[UIKeyboardAnimationCurveUserInfoKey]    as? NSNumber
@@ -108,6 +113,24 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    // MARK: - Table View
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let content = ["Good morning", "1\n2\n3\n4", "What\nTime\nIs\nLove?\n\noh yeah\n\noh yeah"]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
+        cell.message?.text = content[indexPath.row]
+        
+        return cell
     }
 }
 
