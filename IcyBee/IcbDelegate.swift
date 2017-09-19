@@ -31,6 +31,9 @@ class IcbDelegate: FNProtocolDelegate {
         messages = NSEntityDescription.entity(forEntityName: "ChatMessage", in:managedContext)!
     }
     
+    // preference strings are created from default values in the bundle.  Still I don't like so many
+    // !s in the code.  Is there any way the strings could not be there?
+    // Is there any logical thing we could do if the preference strings aren't there?
     func connect() {
         icbClientID = "IcyBee2"
         icbServer   = preferences.string(forKey: "server_preference")!
@@ -146,7 +149,7 @@ class IcbDelegate: FNProtocolDelegate {
     
     func displayMessage(sender: NSAttributedString, text: NSAttributedString) {
         let sender = NSMutableAttributedString(attributedString: sender)
-        let text = NSMutableAttributedString(attributedString: text)
+        let text   = NSMutableAttributedString(attributedString: text)
         
         sender.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, sender.length))
         text.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, text.length))
@@ -259,7 +262,7 @@ class IcbDelegate: FNProtocolDelegate {
     
     func icbReceiveBeepMessage(from: String) {
         // TODO: - really???
-        addMessageToStore(type: FNMessageType.beep, from: "Beep", text: "has sent you a beep!")
+        addMessageToStore(type: FNMessageType.beep, from: from, text: "\(from) has sent you a beep!")
 
         let sender = NSAttributedString(string:"[=Beep!=]")
         let text = NSAttributedString(string: " \(from) has sent you a beep!")
