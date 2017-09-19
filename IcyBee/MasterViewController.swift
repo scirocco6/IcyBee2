@@ -174,6 +174,12 @@ class MasterViewController: UITableViewController {
         updateNameSet()
     }
     
+    // Mark - TODO
+    // while this works well it isn't very pretty.
+    // Instead of keeping a big array in mem should rip it all out and base
+    // it on CoreData the way the message view works
+    // in addition shift to fading in out names on insert/delete
+    // in reality it will be both simpler, more efficient AND prettier
     func updateNameSet() {
         guard
             let group = currentGroupName,
