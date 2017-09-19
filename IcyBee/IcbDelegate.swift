@@ -108,7 +108,7 @@ class IcbDelegate: FNProtocolDelegate {
         
         if regex.matched {
             let user = regex.captures[0]
-            if from == "Arrive" {
+            if from == "Arrive" || from == "Sign-on" {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "FNUserArrived"), object: nil, userInfo: ["user": user])
             }
             else {
@@ -207,17 +207,19 @@ class IcbDelegate: FNProtocolDelegate {
     // inclusive list
     func icbReceiveStatusMessage(from: String, text: String) {
         enum senders: String {
-            case status = "Status"
-            case topic  = "Topic"
-            case depart = "Depart"
-            case arrive = "Arrive"
+            case status  = "Status"
+            case topic   = "Topic"
+            case depart  = "Depart"
+            case arrive  = "Arrive"
+            case signon  = "Sign-on"
+            case signoff = "Sign-off"
         }
         
         if let sender = senders(rawValue: from) {
             switch sender {
             case .status: handleStatusMessage(from: from, text: text)
             case .topic:  handleTopicMessage(from: from, text: text)
-            case .arrive, .depart: handlePresenceMessage(from: from, text: text)
+            case .arrive, .depart, .signon, .signoff: handlePresenceMessage(from: from, text: text)
             }
         }
         else {
