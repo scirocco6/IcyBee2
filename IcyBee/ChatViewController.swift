@@ -176,7 +176,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
         self.tableView.endUpdates()
+        if self.tableView.numberOfRows(inSection: 0) > 0 {
+            self.tableView.scrollToRow(at: IndexPath(row: self.tableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
+        }
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
