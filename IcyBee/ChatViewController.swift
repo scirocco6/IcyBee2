@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+// MARK: - TODO
+// too many delegates.  Break this up
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var titleBar: UINavigationItem!
     @IBOutlet var inputLine: UITextField!
@@ -18,6 +21,25 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var messageString = NSMutableAttributedString(string: "")
     
     var hasExternalKeyboard = false
+    
+    fileprivate let dataContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+
+    fileprivate lazy var fetchedResultsController: NSFetchedResultsController<ChatMessage> = {
+        // Create Fetch Request
+        let fetchRequest: NSFetchRequest<ChatMessage> = ChatMessage.fetchRequest()
+        
+        // Configure Fetch Request
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
+        
+        // Create Fetched Results Controller
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.dataContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Configure Fetched Results Controller
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    
     
 // Mark - View lifecycle
     override func viewDidLoad() {
@@ -32,6 +54,20 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                selector: #selector(ChatViewController.updateTopic(_:)),
                                                name: NSNotification.Name(rawValue: "FNTopicUpdated"),
                                                object: nil)
+        
+        // start the fetcherResultsController
+        // Mark - TODO
+        // again there is no real logical way to handle complete failure of 
+        // CoreData.  Not sure how it could fail this far in but if it did there
+        // isn't much real recourse I can think of
+        do {
+            try self.fetchedResultsController.performFetch()
+        }
+        catch {
+            let fetchError = error as NSError
+            print("Unable to Perform Fetch Request")
+            print("\(fetchError), \(fetchError.localizedDescription)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,16 +157,51 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        guard let messages = fetchedResultsController.fetchedObjects else { return 0 }
+        return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let content = ["Good morning", "1\n2\n3\n4", "What\nTime\nIs\nLove?\n\noh yeah\n\noh yeah"]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
-        cell.message?.text = content[indexPath.row]
+        
+        let message = fetchedResultsController.object(at: indexPath)
+        cell.message?.text = "\(message.sender!) \(message.text!)"
         
         return cell
     }
+    
+    // Mark - NSFetchedResultsControllerDelegate
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?){
+
+        switch type {
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .move: break
+        case .update:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
+        }
+    }
+//
+// Currently the view is one giant section.  Should that change this is the update function for sections
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+//                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+//                    atSectionIndex sectionIndex: Int,
+//                    for type: NSFetchedResultsChangeType){
+//    }
 }
 
