@@ -95,7 +95,9 @@ class IcbDelegate: FNProtocolDelegate {
     
     // Mark: - Output
     func handleStatusMessage(from: String, text: String) {
-        if text.hasPrefix("You are now in group ") {setIcbGroup(text)}
+        if text.hasPrefix("You are now in group ") {
+            setIcbGroup(text)
+        }
         else {
             displayStatusMessage(from: from, text: text)
         }
