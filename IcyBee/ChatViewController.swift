@@ -46,8 +46,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
 
         // needed to enable automatic row height
-        tableView.estimatedRowHeight = 10.0
+        tableView.estimatedRowHeight = 1.1 // estimate to minimum height to force as much hugging as we can get
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        tableView.tableFooterView = UIView()
         
         // subscribe to topic change messages
         NotificationCenter.default.addObserver(self,
@@ -165,8 +167,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
         
         let message = fetchedResultsController.object(at: indexPath)
+        cell.message?.textContainerInset.top = 0
+        cell.message?.textContainerInset.bottom = 0
         cell.message?.text = "\(message.sender!) \(message.text!)"
-        
+
         return cell
     }
     
