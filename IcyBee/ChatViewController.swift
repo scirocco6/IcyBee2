@@ -167,9 +167,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell    = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
         let message = fetchedResultsController.object(at: indexPath)
 
-//        cell.message?.textContainerInset.top = 0
-//        cell.message?.textContainerInset.bottom = 0
-
         // only add the sender if different from the sender in the prior cell
         var sender = message.sender!
         if indexPath[1] != 0 {
