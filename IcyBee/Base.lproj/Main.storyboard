@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -38,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-8D-HIK">
-                                <rect key="frame" x="0.0" y="738" width="702.5" height="30"/>
+                                <rect key="frame" x="0.0" y="738" width="703" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -58,8 +59,13 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="&lt;*123456789012*&gt;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="k6c-ws-mVB" userLabel="Sender">
-                                                    <rect key="frame" x="0.0" y="0.0" width="165" height="100"/>
+                                                    <rect key="frame" x="8" y="0.0" width="165" height="100"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="165" id="PQX-1O-1bM">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                        </constraint>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                     <userDefinedRuntimeAttributes>
@@ -69,9 +75,9 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ax1-eD-D7x">
-                                                    <rect key="frame" x="180" y="0.0" width="523" height="100"/>
+                                                    <rect key="frame" x="173" y="0.0" width="530" height="100"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <mutableString key="text">Turning once again, and this time more generally, to the question of invasion, I would observe that there has never been a period in all these long centuries of which we boast when an absolute guarantee against invasion, still less against serious raids, could have been given to our people. In the days of Napoleon, of which I was speaking just now, the same wind which would have carried his transports across the Channel might have driven away the blockading fleet. There was always the chance, and it is that chance which has excited and befooled the imaginations of many Continental tyrants. Many are the tales that are told.</mutableString>
+                                                    <string key="text">Turning once again, and this time more generally, to the question of invasion, I would observe that there has never been a period in all these long centuries of which we boast when an absolute guarantee against invasion, still less against serious raids, could have been given to our people. In the days of Napoleon, of which I was speaking just now, the same wind which would have carried his transports across the Channel might have driven away the blockading fleet. There was always the chance, and it is that chance which has excited and befooled the imaginations of many Continental tyrants. Many are the tales that are told.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" shipmentTrackingNumber="YES" flightNumber="YES" lookupSuggestion="YES"/>
@@ -83,13 +89,13 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Ax1-eD-D7x" firstAttribute="leading" secondItem="iMp-wz-Huh" secondAttribute="leading" constant="180" id="D2M-xP-cbv"/>
+                                                <constraint firstItem="k6c-ws-mVB" firstAttribute="leading" secondItem="iMp-wz-Huh" secondAttribute="leadingMargin" id="2Yj-Ft-peJ"/>
+                                                <constraint firstItem="Ax1-eD-D7x" firstAttribute="leading" secondItem="k6c-ws-mVB" secondAttribute="trailing" id="BTM-b3-0ci"/>
                                                 <constraint firstAttribute="bottom" secondItem="k6c-ws-mVB" secondAttribute="bottom" id="Gy9-Pk-PBi"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ax1-eD-D7x" secondAttribute="bottom" id="KwY-WZ-xeH"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ax1-eD-D7x" secondAttribute="trailing" id="ht9-HF-KK5"/>
                                                 <constraint firstItem="k6c-ws-mVB" firstAttribute="top" secondItem="iMp-wz-Huh" secondAttribute="top" id="n2J-sa-Ll0"/>
                                                 <constraint firstItem="Ax1-eD-D7x" firstAttribute="top" secondItem="iMp-wz-Huh" secondAttribute="top" id="sEz-3M-n64"/>
-                                                <constraint firstItem="k6c-ws-mVB" firstAttribute="leading" secondItem="iMp-wz-Huh" secondAttribute="leading" id="tyU-8g-nK8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
