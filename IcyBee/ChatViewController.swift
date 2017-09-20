@@ -175,8 +175,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 sender = ""
             }
         }
-        cell.sender?.text  = sender
-        cell.message?.text = message.text!
+        
+        if cell.sender?.frame.width != 0 {
+            cell.sender?.text  = sender
+            cell.message?.text = message.text!
+        }
+        else {
+            cell.message?.text = "\(sender) \(message.text!)"
+        }
         return cell
     }
     
