@@ -281,7 +281,7 @@ class IcbDelegate: FNProtocolDelegate {
     
     func icbReceiveGenericOutput(text: String) {
         // TODO: - really??? seems VERY clumsy
-        addMessageToStore(type: FNMessageType.error, from: "", text: text)
+        addMessageToStore(type: FNMessageType.error, from: "Server", text: text)
 
         let sender = NSMutableAttributedString(string: "")
         let text   = NSAttributedString(string: text)
