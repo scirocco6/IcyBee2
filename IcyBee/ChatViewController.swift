@@ -164,13 +164,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
-        
+        let cell    = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
         let message = fetchedResultsController.object(at: indexPath)
-        cell.message?.textContainerInset.top = 0
-        cell.message?.textContainerInset.bottom = 0
-        cell.message?.text = "\(message.sender!) \(message.text!)"
 
+//        cell.message?.textContainerInset.top = 0
+//        cell.message?.textContainerInset.bottom = 0
+
+        // only add the sender if different from the sender in the prior cell
+        var sender = message.sender!
+        if indexPath[1] != 0 {
+            let oldMessage = fetchedResultsController.object(at: [0, indexPath[1] - 1])
+            if oldMessage.sender! == sender && oldMessage.type == message.type {
+                sender = ""
+            }
+        }
+        cell.sender?.text  = sender
+        cell.message?.text = message.text!
         return cell
     }
     
