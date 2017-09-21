@@ -40,9 +40,6 @@
 		4FFD2E431E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */; };
 		4FFD2E441E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */; };
 		4FFD2E451E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */; };
-		4FFD2E4B1E09CF7500781377 /* CoreDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */; };
-		4FFD2E4C1E09CF7500781377 /* CoreDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */; };
-		4FFD2E4D1E09CF7500781377 /* CoreDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,7 +156,6 @@
 		4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setup.storyboard; sourceTree = "<group>"; };
 		4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IcyBee_Core_Data.xcdatamodel; sourceTree = "<group>"; };
-		4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStructs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,7 +318,6 @@
 			isa = PBXGroup;
 			children = (
 				4FFD2E421E09C51000781377 /* IcyBee_Core_Data.xcdatamodel */,
-				4FFD2E4A1E09CF7500781377 /* CoreDataStructs.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -524,7 +519,6 @@
 				4F9A16041DE3C9DD0040960F /* MasterViewController.swift in Sources */,
 				4FF8D4B21E023CED00BC5610 /* SetupViewController.swift in Sources */,
 				4FF8D4A81E023B3200BC5610 /* SplitViewController.swift in Sources */,
-				4FFD2E4B1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
 				4F9A16021DE3C9DD0040960F /* AppDelegate.swift in Sources */,
 				4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */,
 			);
@@ -536,7 +530,6 @@
 			files = (
 				4FF8D4A91E023B3200BC5610 /* SplitViewController.swift in Sources */,
 				4FF8D4B31E023CED00BC5610 /* SetupViewController.swift in Sources */,
-				4FFD2E4C1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
 				4FFD2E441E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16191DE3C9DD0040960F /* IcyBeeTests.swift in Sources */,
 				4F0889CF1F3B9DDE00144846 /* MessageCell.swift in Sources */,
@@ -549,7 +542,6 @@
 			files = (
 				4FF8D4AA1E023B3200BC5610 /* SplitViewController.swift in Sources */,
 				4FF8D4B41E023CED00BC5610 /* SetupViewController.swift in Sources */,
-				4FFD2E4D1E09CF7500781377 /* CoreDataStructs.swift in Sources */,
 				4FFD2E451E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16241DE3C9DD0040960F /* IcyBeeUITests.swift in Sources */,
 				4F0889D01F3B9DDE00144846 /* MessageCell.swift in Sources */,
