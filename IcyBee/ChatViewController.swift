@@ -168,21 +168,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let message = fetchedResultsController.object(at: indexPath)
 
         // only add the sender if different from the sender in the prior cell
-        var sender = message.sender!
+        var sender = message.sender! + " "
         if indexPath[1] != 0 {
             let oldMessage = fetchedResultsController.object(at: [0, indexPath[1] - 1])
-            if oldMessage.sender! == sender && oldMessage.type == message.type {
+            if oldMessage.sender! == message.sender! && oldMessage.type == message.type {
                 sender = ""
             }
         }
         
-        if cell.sender?.frame.width != 0 {
-            cell.sender?.text  = sender
-            cell.message?.text = message.text!
-        }
-        else {
-            cell.message?.text = "\(sender) \(message.text!)"
-        }
+        cell.message?.text = "\(sender)\(message.text!)"
         return cell
     }
     
