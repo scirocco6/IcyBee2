@@ -123,18 +123,27 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         bottomLayoutConstraint.constant = (keyboardFrame?.origin.y)! >= UIScreen.main.bounds.size.height ? 0.0 : keyboardHeight
         
-        let duration             = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-        let animationCurveNumber =  userInfo[UIKeyboardAnimationCurveUserInfoKey]    as? NSNumber
-        let animationCurveRaw    =  animationCurveNumber?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-        let animationCurve       =  UIViewAnimationOptions(rawValue: animationCurveRaw)
+        self.view.layoutIfNeeded()
+        self.scrollToBottom()
+
+// MARK: - TODO
+// Back when there was a text view above the input line this looked great.  Now that it is a table view and we need to both
+// change the constraint AND scroll the table view it looks horrible
+// find some way to blend the two together and make a nice animation for both
+//
+//        let duration             = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+//        let animationCurveNumber =  userInfo[UIKeyboardAnimationCurveUserInfoKey]    as? NSNumber
+//        let animationCurveRaw    =  animationCurveNumber?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+//        let animationCurve       =  UIViewAnimationOptions(rawValue: animationCurveRaw)
+//
+//        UIView.animate(withDuration: duration,
+//                       delay: TimeInterval(0),
+//                       options: animationCurve,
+//                       animations: { self.view.layoutIfNeeded() },
+//                       completion: { (finished: Bool) in self.scrollToBottom() })
         
-        UIView.animate(withDuration: duration,
-                       delay: TimeInterval(0),
-                       options: animationCurve,
-                       animations: { self.view.layoutIfNeeded() },
-                       completion: nil)
     }
-    
+
 // Mark - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if hasExternalKeyboard == false {textField.resignFirstResponder()}
@@ -180,8 +189,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
         self.tableView.endUpdates()
+        scrollToBottom()
+    }
+    
+    func scrollToBottom() {
         if self.tableView.numberOfRows(inSection: 0) > 0 {
             self.tableView.scrollToRow(at: IndexPath(row: self.tableView.numberOfRows(inSection: 0) - 1, section: 0), at: .bottom, animated: true)
         }
