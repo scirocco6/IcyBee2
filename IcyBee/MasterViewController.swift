@@ -9,6 +9,8 @@
 import UIKit
 import IcbKit
 
+// Mark - TODO
+// In reality this is the GroupViewController need to rename it at some point
 class MasterViewController: UITableViewController {
     @IBOutlet var titleBar: UINavigationItem?
     
