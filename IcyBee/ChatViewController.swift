@@ -140,12 +140,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if hasExternalKeyboard == false {textField.resignFirstResponder()}
         
         if textField.text != "" {
-            // Send the new message to the icbController, which will handle it like any other ICB message.
-            let sender = NSMutableAttributedString(string: "")
-            let text   = NSAttributedString(string: textField.text!)
-            
-            IcbDelegate.icbController.displayMessage(sender: sender, text: text)
-
             IcbDelegate.icbController.parseUserInput(textField.text!)
             textField.text = ""
         }
