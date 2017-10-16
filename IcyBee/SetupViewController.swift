@@ -58,7 +58,7 @@ class SetupViewController: UIViewController, UITextFieldDelegate {
         var setupComplete = true
         
         if (nickname.text == "" || channel.text == "" || password.text == "" || confirm.text == "") {
-            let placeholderString = NSAttributedString(string: "required", attributes: [NSForegroundColorAttributeName: UIColor.red])
+            let placeholderString = NSAttributedString(string: "required", attributes: [NSAttributedStringKey.foregroundColor: UIColor.red])
             
             nickname.attributedPlaceholder = placeholderString
             channel.attributedPlaceholder  = placeholderString

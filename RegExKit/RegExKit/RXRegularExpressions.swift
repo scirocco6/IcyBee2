@@ -43,7 +43,7 @@ public struct RXRegularExpression {
         captures = []
         let match = matches[0]
         for capture in 1..<match.numberOfRanges {
-            captures.append((string as NSString).substring(with: match.rangeAt(capture)))
+            captures.append((string as NSString).substring(with: match.range(at: capture)))
         }
     }
     

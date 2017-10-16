@@ -116,7 +116,7 @@ class MasterViewController: UITableViewController {
     // Mark: User interaction
     
     // MARK: - ICB
-    func updateWho(_ notification: Notification) {
+    @objc func updateWho(_ notification: Notification) {
         guard
             let results    = notification.userInfo?["whoResults"] as! FNWhoResults?,
             let groupName  = currentGroupName,
@@ -134,7 +134,7 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    func updateGroup(_ notification: Notification) {
+    @objc func updateGroup(_ notification: Notification) {
         if let groupName = notification.userInfo?["groupName"] as? String {
             currentGroupName = groupName
             currentGroup = whoResults?.groups[groupName]
@@ -144,7 +144,7 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    func userArrived(_ notification: Notification) {
+    @objc func userArrived(_ notification: Notification) {
         guard
             let userName = notification.userInfo?["user"] as? String,
             let group = currentGroupName
@@ -159,7 +159,7 @@ class MasterViewController: UITableViewController {
         updateNameSet()
     }
     
-    func userDeparted(_ notification: Notification) {
+    @objc func userDeparted(_ notification: Notification) {
         guard
             let userName = notification.userInfo?["user"] as? String,
             let group = currentGroupName

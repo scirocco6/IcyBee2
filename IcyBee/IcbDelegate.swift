@@ -125,7 +125,8 @@ class IcbDelegate: FNProtocolDelegate {
         if let range = text.range(of: "You are now in group ") {
             icbGlobalWho() // update all who information
             
-            icbChannel = text.substring(from: range.upperBound)
+            //icbChannel = text.substring(from: range.upperBound)
+            icbChannel = String(text[range.upperBound...])
             if let range = icbChannel.range(of: " as moderator") {
                 icbChannel.removeSubrange(range)
             }
@@ -137,7 +138,9 @@ class IcbDelegate: FNProtocolDelegate {
 
     func handleTopicMessage(from: String, text: String) {
         if let range = text.range(of: "changed the topic to \"") {
-            let topic = String(text.substring(from: range.upperBound).characters.dropLast())
+            // let topic = String(text.substring(from: range.upperBound).characters.dropLast())
+            let topic = String(text[range.upperBound...].characters.dropLast())
+            
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
         }
     }
@@ -153,8 +156,8 @@ class IcbDelegate: FNProtocolDelegate {
         let sender = NSMutableAttributedString(attributedString: sender)
         let text   = NSMutableAttributedString(attributedString: text)
         
-        sender.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, sender.length))
-        text.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, text.length))
+        sender.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, sender.length))
+        text.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, text.length))
         
         //message.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: NSMakeRange(0, message.length))
         
@@ -168,9 +171,9 @@ class IcbDelegate: FNProtocolDelegate {
         let sender = NSMutableAttributedString(string: "[=IcyBee=]")
         let text   = NSMutableAttributedString(string: errorMessage)
         
-        sender.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, sender.length))
-        text.addAttributes([NSFontAttributeName: courierNormal!], range: NSMakeRange(0, text.length))
-        text.addAttributes([NSForegroundColorAttributeName: UIColor.red], range: NSMakeRange(0, text.length))
+        sender.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, sender.length))
+        text.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, text.length))
+        text.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.red], range: NSMakeRange(0, text.length))
 
         NotificationCenter.default.post(
             name: Notification.Name(rawValue: "FNNewMessage"),
@@ -305,7 +308,7 @@ class IcbDelegate: FNProtocolDelegate {
         let chatMessage = ChatMessage(context: managedContext)
         chatMessage.sender = from
         chatMessage.text = text
-        chatMessage.timeStamp = Date() as NSDate
+        chatMessage.timeStamp = Date()
         chatMessage.type = String(type.rawValue)
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()

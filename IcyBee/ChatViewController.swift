@@ -97,14 +97,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
 // Mark - Topic updates
-    func updateTopic(_ notification: Notification) {
+    @objc func updateTopic(_ notification: Notification) {
         if let topic = notification.userInfo?["topic"] as? String {
             titleBar?.title = topic == "(None)" ? "" : topic // don't show (None) as topic blank instead
         }
     }
     
 // Mark - Keyboard handling
-    func keyboardNotification(notification: NSNotification) {
+    @objc func keyboardNotification(notification: NSNotification) {
         guard let userInfo = notification.userInfo else {return}
 
         let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue

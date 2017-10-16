@@ -21,7 +21,7 @@ class MessageView: UITextView {
     }
 
     // Mark - ICB Output
-    func addMessage(_ notification: Notification) {
+    @objc func addMessage(_ notification: Notification) {
         let newMessage = NSMutableAttributedString(string: "")
         if let from = notification.userInfo?["from"] as? NSAttributedString {
             newMessage.append(from)
