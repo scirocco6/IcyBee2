@@ -18,7 +18,8 @@ class IcbDelegate: FNProtocolDelegate {
 
     let preferences   = UserDefaults.standard
     let courierNormal = UIFont(name: "Courier", size: 16)
-
+    let spaceString   = NSMutableAttributedString(string: " ")
+    
     // Core Data
     let dataContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     var managedContext: NSManagedObjectContext
@@ -64,7 +65,7 @@ class IcbDelegate: FNProtocolDelegate {
             icbJoinGroup(target)
         }
         else {
-            userTextErrorMessage("USAGE: /g groupname\n")
+            icbReceiveUsageMessage("USAGE: /g groupname\n")
         }
     }
     
@@ -77,7 +78,7 @@ class IcbDelegate: FNProtocolDelegate {
             icbSendPrivateMessage(message, to: target)
         }
         else {
-            userTextErrorMessage("USAGE: /m nickname message\n")
+            icbReceiveUsageMessage("USAGE: /m nickname message\n")
         }
     }
     
@@ -89,7 +90,7 @@ class IcbDelegate: FNProtocolDelegate {
             icbSendBeep(to: target)
         }
         else {
-            userTextErrorMessage("USAGE: /beep nickname\n")
+            icbReceiveUsageMessage("USAGE: /beep nickname\n")
         }
     }
     
@@ -99,7 +100,7 @@ class IcbDelegate: FNProtocolDelegate {
             setIcbGroup(text)
         }
         else {
-            displayStatusMessage(from: from, text: text)
+            icbReceiveGenericStatusMessage(from: from, text: text)
         }
     }
     
@@ -143,42 +144,6 @@ class IcbDelegate: FNProtocolDelegate {
             
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
         }
-    }
-    
-    func displayStatusMessage(from: String, text: String) {
-        let from = NSAttributedString(string:"[=\(from)=]")
-        let text = NSAttributedString(string: text)
-    
-        displayMessage(sender: from, text: text)
-    }
-    
-    func displayMessage(sender: NSAttributedString, text: NSAttributedString) {
-        let sender = NSMutableAttributedString(attributedString: sender)
-        let text   = NSMutableAttributedString(attributedString: text)
-        
-        sender.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, sender.length))
-        text.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, text.length))
-        
-        //message.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: NSMakeRange(0, message.length))
-        
-        NotificationCenter.default.post(
-            name: Notification.Name(rawValue: "FNNewMessage"),
-            object: nil,
-            userInfo: ["from": sender, "text": text])
-    }
-    
-    func userTextErrorMessage(_ errorMessage: String) {
-        let sender = NSMutableAttributedString(string: "[=IcyBee=]")
-        let text   = NSMutableAttributedString(string: errorMessage)
-        
-        sender.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, sender.length))
-        text.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, text.length))
-        text.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.red], range: NSMakeRange(0, text.length))
-
-        NotificationCenter.default.post(
-            name: Notification.Name(rawValue: "FNNewMessage"),
-            object: nil,
-            userInfo: ["from": sender, "text": text])
     }
     
     // MARK: - FNProtocol
@@ -226,71 +191,106 @@ class IcbDelegate: FNProtocolDelegate {
             }
         }
         else {
-            displayStatusMessage(from: from, text: text)
+            icbReceiveGenericStatusMessage(from: from, text: text)
         }
+    }
+    
+    func icbReceiveGenericStatusMessage(from: String, text: String) {
+        let nickname         = NSAttributedString(string:"[=\(from)=]")
+        let messageText      = NSAttributedString(string: text)
+        let decoratedMessage = NSMutableAttributedString(string: "")
+        decoratedMessage.append(nickname)
+        decoratedMessage.append(spaceString)
+        decoratedMessage.append(messageText)
+        
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedMessage: decoratedMessage)
     }
 
     func icbReceiveOpenMessage(from: String, text: String) {
-        addMessageToStore(type: FNMessageType.open, from: from, text: text)
-
-        let nickname = NSAttributedString(string:"<\(from)>")
-        let message  = NSAttributedString(string: text)
-
-        displayMessage(sender: nickname, text: message)
+        let nickname         = NSAttributedString(string:"<\(from)>")
+        let messageText      = NSAttributedString(string: text)
+        let decoratedMessage = NSMutableAttributedString(string: "")
+        decoratedMessage.append(nickname)
+        decoratedMessage.append(spaceString)
+        decoratedMessage.append(messageText)
+        
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedMessage: decoratedMessage)
     }
     
     func icbReceivePersonalMessage(from: String, text: String) {
-        addMessageToStore(type: FNMessageType.personal, from: from, text: text)
+        let nickname         = NSAttributedString(string:"<*\(from)*>")
+        let messageText      = NSAttributedString(string: text)
+        let decoratedMessage = NSMutableAttributedString(string: "")
+        decoratedMessage.append(nickname)
+        decoratedMessage.append(spaceString)
+        decoratedMessage.append(messageText)
 
-        let from = NSAttributedString(string:"<*\(from)*>")
-        let text = NSAttributedString(string: text)
-        
-        displayMessage(sender: from, text: text)
+        addMessageToStore(type: FNMessageType.personal, from: from, text: text, decoratedMessage: decoratedMessage)
     }
     
     func icbReceiveImportantMessage(from: String, text: String) {
-        addMessageToStore(type: FNMessageType.important, from: from, text: text)
+        let nickname         = NSAttributedString(string:"<=\(from)=>")
+        let messageText      = NSAttributedString(string: text)
+        let decoratedMessage = NSMutableAttributedString(string: "")
+        decoratedMessage.append(nickname)
+        decoratedMessage.append(spaceString)
+        decoratedMessage.append(messageText)
 
-        let from = NSAttributedString(string:"<=\(from)=>")
-        let text = NSAttributedString(string: text)
-        
-        displayMessage(sender: from, text: text)
+        addMessageToStore(type: FNMessageType.important, from: from, text: text, decoratedMessage: decoratedMessage)
     }
     
     func icbReceiveErrorMessage(text: String) {
-        // TODO: - really???
-        addMessageToStore(type: FNMessageType.error, from: "Error", text: text)
-
-        let from = NSAttributedString(string:"[=Error=]")
-        let text = NSAttributedString(string: text)
+        let nickname         = NSAttributedString(string:"[=Error=]")
+        let messageText      = NSAttributedString(string: text)
+        let decoratedMessage = NSMutableAttributedString(string: "")
+        decoratedMessage.append(nickname)
+        decoratedMessage.append(spaceString)
+        decoratedMessage.append(messageText)
         
-        displayMessage(sender: from, text: text)
+        addMessageToStore(type: FNMessageType.error, from: "Error", text: text, decoratedMessage: decoratedMessage)
     }
     
     func icbReceiveBeepMessage(from: String) {
-        // TODO: - really???
-        addMessageToStore(type: FNMessageType.beep, from: from, text: "\(from) has sent you a beep!")
-
-        let sender = NSAttributedString(string:"[=Beep!=]")
-        let text = NSAttributedString(string: " \(from) has sent you a beep!")
+        let text             = "\(from) has sent you a beep!"
+        let nickname         = NSAttributedString(string:"[=\(from)=]")
+        let messageText      = NSAttributedString(string: text)
+        let decoratedMessage = NSMutableAttributedString(string: "")
+        decoratedMessage.append(nickname)
+        decoratedMessage.append(spaceString)
+        decoratedMessage.append(messageText)
+        
+        addMessageToStore(type: FNMessageType.beep, from: from, text: text, decoratedMessage: decoratedMessage)
         
         // http://iphonedevwiki.net/index.php/AudioServices
         // AudioServicesPlayAlertSound(1054)
         // AudioServicesPlayAlertSound(1106)
         AudioServicesPlayAlertSound(1013)
-        
-        displayMessage(sender: sender, text: text)
     }
     
     func icbReceiveGenericOutput(text: String) {
-        // TODO: - really??? seems VERY clumsy
-        addMessageToStore(type: FNMessageType.error, from: "Server", text: text)
-
-        let sender = NSMutableAttributedString(string: "")
-        let text   = NSAttributedString(string: text)
-        
-        displayMessage(sender: sender, text: text)
+        addMessageToStore(type: FNMessageType.error, from: "Server", text: text, decoratedMessage: NSAttributedString(string: text))
     }
+    
+
+    
+    func icbReceiveUsageMessage(_ errorMessage: String) {
+        let from = "IcyBee"
+        
+        let nickname = NSMutableAttributedString(string:"[=\(from)=]")
+        nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
+
+        let messageText = NSMutableAttributedString(string: errorMessage)
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
+        messageText.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.red], range: NSMakeRange(0, messageText.length))
+        
+        let decoratedMessage = NSMutableAttributedString(string: "")
+        decoratedMessage.append(nickname)
+        decoratedMessage.append(spaceString)
+        decoratedMessage.append(messageText)
+        
+        addMessageToStore(type: FNMessageType.beep, from: from, text: errorMessage, decoratedMessage: decoratedMessage)
+    }
+    
     
     func icbWhoComplete() {
         DispatchQueue.main.async(execute: {
@@ -304,13 +304,15 @@ class IcbDelegate: FNProtocolDelegate {
     
     // MARK: - Core Data
     
-    func addMessageToStore(type: FNMessageType, from: String, text: String) {
+    func addMessageToStore(type: FNMessageType, from: String, text: String, decoratedMessage: NSAttributedString) {
         let chatMessage = ChatMessage(context: managedContext)
+        chatMessage.type = String(type.rawValue)
+        chatMessage.timeStamp = Date()
+
         chatMessage.sender = from
         chatMessage.text = text
-        chatMessage.timeStamp = Date()
-        chatMessage.type = String(type.rawValue)
-        
+        chatMessage.decoratedMessage = decoratedMessage
+
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
 

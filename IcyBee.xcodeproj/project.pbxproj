@@ -27,7 +27,6 @@
 		4F9A16AC1DE3CF820040960F /* RegExKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9A165B1DE3CA110040960F /* RegExKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F9A16B41DE4E7460040960F /* NicknameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B31DE4E7460040960F /* NicknameCell.swift */; };
 		4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A16B51DE51F000040960F /* IcbDelegate.swift */; };
-		4FCA2AE31DEFCD9E00391CCA /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */; };
 		4FF8D4A81E023B3200BC5610 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */; };
 		4FF8D4A91E023B3200BC5610 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */; };
 		4FF8D4AA1E023B3200BC5610 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */; };
@@ -151,7 +150,6 @@
 		4F9A16851DE3CA560040960F /* IcbKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IcbKit.xcodeproj; path = IcbKit/IcbKit.xcodeproj; sourceTree = "<group>"; };
 		4F9A16B31DE4E7460040960F /* NicknameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameCell.swift; sourceTree = "<group>"; };
 		4F9A16B51DE51F000040960F /* IcbDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IcbDelegate.swift; sourceTree = "<group>"; };
-		4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		4FF8D4A71E023B3200BC5610 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		4FF8D4AD1E023C9A00BC5610 /* Setup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setup.storyboard; sourceTree = "<group>"; };
 		4FF8D4B11E023CED00BC5610 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 			children = (
 				4F9A16B31DE4E7460040960F /* NicknameCell.swift */,
 				4F0889CD1F3B9DDE00144846 /* MessageCell.swift */,
-				4FCA2AE21DEFCD9E00391CCA /* MessageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -515,7 +512,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F0889CE1F3B9DDE00144846 /* MessageCell.swift in Sources */,
-				4FCA2AE31DEFCD9E00391CCA /* MessageView.swift in Sources */,
 				4F9A16B61DE51F000040960F /* IcbDelegate.swift in Sources */,
 				4FFD2E431E09C51000781377 /* IcyBee_Core_Data.xcdatamodel in Sources */,
 				4F9A16061DE3C9DD0040960F /* ChatViewController.swift in Sources */,

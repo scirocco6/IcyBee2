@@ -170,16 +170,21 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell    = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
         let message = fetchedResultsController.object(at: indexPath)
 
-        // only add the sender if different from the sender in the prior cell
-        var sender = message.sender! + " "
-        if indexPath[1] != 0 {
-            let oldMessage = fetchedResultsController.object(at: [0, indexPath[1] - 1])
-            if oldMessage.sender! == message.sender! && oldMessage.type == message.type {
-                sender = ""
-            }
-        }
+// This doesn't work very well visually in icb due to the weird way messages get chunked by the packet size limit
+// May want to use this or something like it if we go back to a seperate label for sender
+//
+//        // only add the sender if different from the sender in the prior cell
+//        var sender = message.sender! + " "
+//        if indexPath[1] != 0 {
+//            let oldMessage = fetchedResultsController.object(at: [0, indexPath[1] - 1])
+//            if oldMessage.sender! == message.sender! && oldMessage.type == message.type {
+//                sender = ""
+//            }
+//        }
+//
+//        cell.message?.text = "\(sender)\(message.text!)"
         
-        cell.message?.text = "\(sender)\(message.text!)"
+        cell.message?.attributedText = message.decoratedMessage as! NSAttributedString
         return cell
     }
     
