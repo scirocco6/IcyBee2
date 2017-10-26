@@ -216,12 +216,5 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
-//
-// Currently the view is one giant section.  Should that change this is the update function for sections
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-//                    didChange sectionInfo: NSFetchedResultsSectionInfo,
-//                    atSectionIndex sectionIndex: Int,
-//                    for type: NSFetchedResultsChangeType){
-//    }
 }
 
