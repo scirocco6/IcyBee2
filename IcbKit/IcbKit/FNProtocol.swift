@@ -94,7 +94,7 @@ public extension FNProtocol {
             let moderator   = regex.captures[2]
             let topic       = regex.captures[3]
             
-            let perms = Array(permissions.characters)
+            let perms = Array(permissions)
             let moderation = FNModeration(rawValue: perms[0])
             let visibility = FNVisibility(rawValue: perms[1])
             let volume     = FNVolume(rawValue: perms[2])

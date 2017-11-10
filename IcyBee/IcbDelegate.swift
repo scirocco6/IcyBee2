@@ -140,7 +140,7 @@ class IcbDelegate: FNProtocolDelegate {
     func handleTopicMessage(from: String, text: String) {
         if let range = text.range(of: "changed the topic to \"") {
             // let topic = String(text.substring(from: range.upperBound).characters.dropLast())
-            let topic = String(text[range.upperBound...].characters.dropLast())
+            let topic = String(text[range.upperBound...].dropLast())
             
             NotificationCenter.default.post(name: Notification.Name(rawValue: "FNTopicUpdated"), object: nil, userInfo: ["topic": topic])
         }
