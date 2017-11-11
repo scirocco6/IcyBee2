@@ -101,6 +101,12 @@
       "idiom" : "ipad",
       "filename" : "2 bees iPad Pro App.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "2 bees iPhone Marketing 1024pxl icon.png",
+      "scale" : "1x"
     }
   ],
   "info" : {
