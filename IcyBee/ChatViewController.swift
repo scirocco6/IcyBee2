@@ -170,27 +170,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell    = tableView.dequeueReusableCell(withIdentifier: "Chat Message", for: indexPath) as! MessageCell
         let message = fetchedResultsController.object(at: indexPath)
 
-// This doesn't work very well visually in icb due to the weird way messages get chunked by the packet size limit
-// May want to use this or something like it if we go back to a seperate label for sender
-//
-//        // only add the sender if different from the sender in the prior cell
-//        var sender = message.sender! + " "
-//        if indexPath[1] != 0 {
-//            let oldMessage = fetchedResultsController.object(at: [0, indexPath[1] - 1])
-//            if oldMessage.sender! == message.sender! && oldMessage.type == message.type {
-//                sender = ""
-//            }
-//        }
-//
-//        cell.message?.text = "\(sender)\(message.text!)"
-
-        cell.message?.attributedText = message.decoratedMessage as! NSAttributedString
- 
-        if let nick = message.decoratedLabel as? NSAttributedString {
-            cell.label?.attributedText = nick
-        } else {
-            cell.label?.text = ""
+        // only add the sender label if different from the sender in the prior cell
+        if let label = message.decoratedLabel as? NSMutableAttributedString {
+            if indexPath[1] != 0 {
+                let oldMessage = fetchedResultsController.object(at: [0, indexPath[1] - 1])
+                if oldMessage.sender! == message.sender! && oldMessage.type == message.type {
+                    label.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], range: NSMakeRange(0, label.length))
+                }
+                cell.label?.attributedText = label
+            }
         }
+        else {
+            cell.label?.text = "" // blank the label when there is no actual sender
+        }
+
+        cell.message?.attributedText = message.decoratedMessage as? NSAttributedString
+ 
         return cell
     }
     
