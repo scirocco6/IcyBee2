@@ -196,81 +196,65 @@ class IcbDelegate: FNProtocolDelegate {
     }
     
     func icbReceiveGenericStatusMessage(from: String, text: String) {
-        let nickname         = NSAttributedString(string:"[=\(from)=]")
-        let messageText      = NSAttributedString(string: text)
-        let decoratedMessage = NSMutableAttributedString(string: "")
-        decoratedMessage.append(nickname)
-        decoratedMessage.append(spaceString)
-        decoratedMessage.append(messageText)
+        let nickname         = NSMutableAttributedString(string:"[=\(from)=]")
+        let messageText      = NSMutableAttributedString(string: text)
         
-        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedMessage: decoratedMessage)
+        nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
+        
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedLabel: nickname, decoratedMessage: messageText)
     }
-
-//    func icbReceiveOpenMessage(from: String, text: String) {
-//        let nickname         = NSAttributedString(string:"<\(from)>")
-//        let messageText      = NSAttributedString(string: text)
-//        let decoratedMessage = NSMutableAttributedString(string: "")
-//        decoratedMessage.append(nickname)
-//        decoratedMessage.append(spaceString)
-//        decoratedMessage.append(messageText)
-//
-//        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedMessage: decoratedMessage)
-//    }
     
     func icbReceiveOpenMessage(from: String, text: String) {
         let nickname         = NSMutableAttributedString(string:"<\(from)>")
-        let decoratedMessage = NSMutableAttributedString(string: text)
+        let messageText = NSMutableAttributedString(string: text)
         
         nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
-        decoratedMessage.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, decoratedMessage.length))
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
         
-        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedLabel: nickname, decoratedMessage: decoratedMessage)
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedLabel: nickname, decoratedMessage: messageText)
     }
     
     
     func icbReceivePersonalMessage(from: String, text: String) {
-        let nickname         = NSAttributedString(string:"<*\(from)*>")
-        let messageText      = NSAttributedString(string: text)
-        let decoratedMessage = NSMutableAttributedString(string: "")
-        decoratedMessage.append(nickname)
-        decoratedMessage.append(spaceString)
-        decoratedMessage.append(messageText)
-
-        addMessageToStore(type: FNMessageType.personal, from: from, text: text, decoratedMessage: decoratedMessage)
+        let nickname         = NSMutableAttributedString(string:"<*\(from)*>")
+        let messageText      = NSMutableAttributedString(string: text)
+        
+        nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
+        
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedLabel: nickname, decoratedMessage: messageText)
     }
     
     func icbReceiveImportantMessage(from: String, text: String) {
-        let nickname         = NSAttributedString(string:"<=\(from)=>")
-        let messageText      = NSAttributedString(string: text)
-        let decoratedMessage = NSMutableAttributedString(string: "")
-        decoratedMessage.append(nickname)
-        decoratedMessage.append(spaceString)
-        decoratedMessage.append(messageText)
-
-        addMessageToStore(type: FNMessageType.important, from: from, text: text, decoratedMessage: decoratedMessage)
+        let nickname         = NSMutableAttributedString(string:"<=\(from)=>")
+        let messageText      = NSMutableAttributedString(string: text)
+        
+        nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
+        
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedLabel: nickname, decoratedMessage: messageText)
     }
     
     func icbReceiveErrorMessage(text: String) {
-        let nickname         = NSAttributedString(string:"[=Error=]")
-        let messageText      = NSAttributedString(string: text)
-        let decoratedMessage = NSMutableAttributedString(string: "")
-        decoratedMessage.append(nickname)
-        decoratedMessage.append(spaceString)
-        decoratedMessage.append(messageText)
+        let nickname         = NSMutableAttributedString(string:"[=Error=]")
+        let messageText      = NSMutableAttributedString(string: text)
         
-        addMessageToStore(type: FNMessageType.error, from: "Error", text: text, decoratedMessage: decoratedMessage)
+        nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
+        
+        addMessageToStore(type: FNMessageType.open, from: "Error", text: text, decoratedLabel: nickname, decoratedMessage: messageText)
     }
     
     func icbReceiveBeepMessage(from: String) {
         let text             = "\(from) has sent you a beep!"
-        let nickname         = NSAttributedString(string:"[=\(from)=]")
-        let messageText      = NSAttributedString(string: text)
-        let decoratedMessage = NSMutableAttributedString(string: "")
-        decoratedMessage.append(nickname)
-        decoratedMessage.append(spaceString)
-        decoratedMessage.append(messageText)
+        let nickname         = NSMutableAttributedString(string:"[=\(from)=]")
+        let messageText      = NSMutableAttributedString(string: text)
         
-        addMessageToStore(type: FNMessageType.beep, from: from, text: text, decoratedMessage: decoratedMessage)
+        nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
+        
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedLabel: nickname, decoratedMessage: messageText)
         
         // http://iphonedevwiki.net/index.php/AudioServices
         // AudioServicesPlayAlertSound(1054)
@@ -279,7 +263,10 @@ class IcbDelegate: FNProtocolDelegate {
     }
     
     func icbReceiveGenericOutput(text: String) {
-        addMessageToStore(type: FNMessageType.error, from: "Server", text: text, decoratedMessage: NSAttributedString(string: text))
+        let messageText = NSMutableAttributedString(string: text)
+
+        messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
+        addMessageToStore(type: FNMessageType.error, from: "Server", text: text, decoratedMessage: messageText)
     }
     
 
