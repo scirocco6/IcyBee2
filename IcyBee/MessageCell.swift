@@ -9,5 +9,6 @@
 import UIKit
 
 class MessageCell: UITableViewCell {
+    @IBOutlet var label: UILabel?
     @IBOutlet var message: UITextView?
 }

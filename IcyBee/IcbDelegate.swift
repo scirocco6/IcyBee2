@@ -206,16 +206,27 @@ class IcbDelegate: FNProtocolDelegate {
         addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedMessage: decoratedMessage)
     }
 
+//    func icbReceiveOpenMessage(from: String, text: String) {
+//        let nickname         = NSAttributedString(string:"<\(from)>")
+//        let messageText      = NSAttributedString(string: text)
+//        let decoratedMessage = NSMutableAttributedString(string: "")
+//        decoratedMessage.append(nickname)
+//        decoratedMessage.append(spaceString)
+//        decoratedMessage.append(messageText)
+//
+//        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedMessage: decoratedMessage)
+//    }
+    
     func icbReceiveOpenMessage(from: String, text: String) {
-        let nickname         = NSAttributedString(string:"<\(from)>")
-        let messageText      = NSAttributedString(string: text)
-        let decoratedMessage = NSMutableAttributedString(string: "")
-        decoratedMessage.append(nickname)
-        decoratedMessage.append(spaceString)
-        decoratedMessage.append(messageText)
+        let nickname         = NSMutableAttributedString(string:"<\(from)>")
+        let decoratedMessage = NSMutableAttributedString(string: text)
         
-        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedMessage: decoratedMessage)
+        nickname.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, nickname.length))
+        decoratedMessage.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, decoratedMessage.length))
+        
+        addMessageToStore(type: FNMessageType.open, from: from, text: text, decoratedLabel: nickname, decoratedMessage: decoratedMessage)
     }
+    
     
     func icbReceivePersonalMessage(from: String, text: String) {
         let nickname         = NSAttributedString(string:"<*\(from)*>")
@@ -313,6 +324,19 @@ class IcbDelegate: FNProtocolDelegate {
         chatMessage.text = text
         chatMessage.decoratedMessage = decoratedMessage
 
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+    
+    func addMessageToStore(type: FNMessageType, from: String, text: String, decoratedLabel: NSAttributedString, decoratedMessage: NSAttributedString) {
+        let chatMessage = ChatMessage(context: managedContext)
+        chatMessage.type = String(type.rawValue)
+        chatMessage.timeStamp = Date()
+        
+        chatMessage.sender = from
+        chatMessage.text = text
+        chatMessage.decoratedMessage = decoratedMessage
+        chatMessage.decoratedLabel = decoratedLabel
+        
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
 

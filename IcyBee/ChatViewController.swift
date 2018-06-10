@@ -183,8 +183,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        }
 //
 //        cell.message?.text = "\(sender)\(message.text!)"
-        
+
         cell.message?.attributedText = message.decoratedMessage as! NSAttributedString
+ 
+        if let nick = message.decoratedLabel as? NSAttributedString {
+            cell.label?.attributedText = nick
+        } else {
+            cell.label?.text = ""
+        }
         return cell
     }
     
