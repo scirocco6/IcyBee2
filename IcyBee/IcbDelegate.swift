@@ -17,8 +17,8 @@ class IcbDelegate: FNProtocolDelegate {
     public static let icbController = IcbDelegate()
 
     let preferences   = UserDefaults.standard
-//    let bodyFont = UIFont(name: "Courier", size: 16)
-    let bodyFont = UIFont.preferredFont(forTextStyle: .body)
+    let bodyFont      = UIFont.preferredFont(forTextStyle: .body)
+    var bodyItalicFont: UIFont
     
     // Core Data
     let dataContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
@@ -30,6 +30,10 @@ class IcbDelegate: FNProtocolDelegate {
         
         // TODO: - I don't know how it could ever fail here but handle better               --v
         messages = NSEntityDescription.entity(forEntityName: "ChatMessage", in:managedContext)!
+        
+        
+        let descriptor = bodyFont.fontDescriptor.withSymbolicTraits(.traitItalic)
+        bodyItalicFont = UIFont(descriptor: descriptor!, size: 0) // is it possible for this to fail? I don't think it is
     }
     
     // preference strings are created from default values in the bundle.  Still I don't like so many
@@ -49,11 +53,36 @@ class IcbDelegate: FNProtocolDelegate {
     
     // MARK: - User Input
     func parseUserInput(_ input: String) {
-        if input.hasPrefix("/beep")   { beep(input) }
-        else if input.hasPrefix("/m") { privateMessage(input) }
-        else if input.hasPrefix("/g") { joinGroup(input) }
-//        else if input.hasPrefix("/w") { whoCommand(input) }
-        else {icbSendOpenMessage(input)}
+        var type: FNMessageType
+        
+        if input.hasPrefix("/beep")   {
+            type = .beep
+            beep(input)
+            
+        }
+        else if input.hasPrefix("/m") {
+            type = .personal
+            privateMessage(input)
+        }
+        else if input.hasPrefix("/g") {
+            joinGroup(input)
+            type = .open
+        }
+//        else if input.hasPrefix("/w") { whoCommand(input) }  // someday this will tie into ui to do a popup for who or whoing just one channel
+        else {
+            icbSendOpenMessage(input)
+            type = .open
+        }
+        
+        addCommandToStore(input, type: type) // let the user see what they typed
+
+    }
+    
+    func addCommandToStore(_ command: String, type: FNMessageType) {
+        let messageText = NSMutableAttributedString(string: command)
+        messageText.addAttributes([NSAttributedStringKey.font: bodyItalicFont], range: NSMakeRange(0, messageText.length))
+        
+        addMessageToStore(type: type, from: icbNickname, text: command, decoratedMessage: messageText)
     }
     
     // iOS input methods will sometimes add an extra whitespace to the end
