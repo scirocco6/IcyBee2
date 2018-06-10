@@ -268,9 +268,7 @@ class IcbDelegate: FNProtocolDelegate {
         messageText.addAttributes([NSAttributedStringKey.font: courierNormal!], range: NSMakeRange(0, messageText.length))
         addMessageToStore(type: FNMessageType.error, from: "Server", text: text, decoratedMessage: messageText)
     }
-    
 
-    
     func icbReceiveUsageMessage(_ errorMessage: String) {
         let from = "IcyBee"
         
