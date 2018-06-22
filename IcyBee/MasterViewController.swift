@@ -70,6 +70,8 @@ class MasterViewController: UITableViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         // unsubscribe from who updates
+        // need to keep this subscribed as long as we are still using a local data structure to hold the who data.
+        // once we start deriving that from core data we can unsub while the view is hidden
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "FNWhoUpdated"), object: nil)
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "FNGroupUpdated"), object: nil)
     }
