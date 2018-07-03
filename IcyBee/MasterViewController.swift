@@ -113,6 +113,12 @@ class MasterViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let nickName = usersInGroup?[indexPath.row] {
+            print(nickName)
+        }
+    }
+    
     // Mark: User interaction
     
     // MARK: - ICB
